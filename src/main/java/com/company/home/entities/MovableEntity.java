@@ -8,8 +8,8 @@ public abstract class MovableEntity {
     private int width;
 
     public MovableEntity(int row, int column, int height, int width) {
-        this.getRow() = row;
-        this.getColumn() = column;
+        this.row = row;
+        this.column = column;
         this.height = height;
         this.width = width;
     }
@@ -19,7 +19,7 @@ public abstract class MovableEntity {
     }
 
     public void setRow(int row) {
-        this.getRow() = row;
+        this.row = row;
     }
 
     public int getColumn() {
@@ -27,7 +27,7 @@ public abstract class MovableEntity {
     }
 
     public void setColumn(int column) {
-        this.getColumn() = column;
+        this.column = column;
     }
 
     public int getHeight() {
@@ -39,25 +39,8 @@ public abstract class MovableEntity {
     }
 
     public boolean isIntersect(MovableEntity movableEntity) {
-        int tw = this.width;
-        int th = this.height;
-        int rw = movableEntity.width;
-        int rh = movableEntity.height;
-        if (rw <= 0 || rh <= 0 || tw <= 0 || th <= 0) {
-            return false;
-        }
-        int tx = this.getRow();
-        int ty = this.getColumn();
-        int rx = movableEntity.getRow();
-        int ry = movableEntity.getColumn();
-        rw += rx;
-        rh += ry;
-        tw += tx;
-        th += ty;
-
-        return ((rw < rx || rw > tx) &&
-                (rh < ry || rh > ty) &&
-                (tw < tx || tw > rx) &&
-                (th < ty || th > ry));
+        return ((this.row + this.height - 1) >= movableEntity.row &&
+                this.row <= (movableEntity.row + movableEntity.height) &&
+                this.column == movableEntity.column);
     }
 }

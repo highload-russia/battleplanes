@@ -8,9 +8,8 @@ import java.util.Random;
 import com.company.home.entities.Boom;
 import com.company.home.entities.Bullet;
 import com.company.home.entities.Opponent;
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextCharacter;
+import com.company.home.entities.Player;
+import com.company.home.gui.Gui;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.*;
@@ -30,23 +29,19 @@ public class Main {
 
         screen.startScreen();
 
-        int planeHeight = 4;
         int lifes = 5;
 
-        int startRow = (screen.getTerminalSize().getRows() / 2) - (planeHeight / 2);
-
-        tg.drawRectangle(TerminalPosition.TOP_LEFT_CORNER, terminal.getTerminalSize(), TextCharacter.DEFAULT_CHARACTER);
-
-        tg.drawTriangle(new TerminalPosition(1, startRow), new TerminalPosition(1, startRow + 4), new TerminalPosition(4, startRow + 2), '*');
-
-        screen.refresh();
-
+        Player player = new Player((screen.getTerminalSize().getRows() / 2), 1);
         KeyStroke ks = new KeyStroke(ArrowUp);
 
         List<Bullet> bullets = new ArrayList<Bullet>();
         List<Opponent> opponents = new ArrayList<Opponent>();
         List<Boom> booms = new ArrayList<Boom>();
+        List<Bullet> tmpBullets;
+        List<Opponent> tmpOpponents;
         long wave = 1L;
+
+        Gui gui = new Gui(tg, terminal, player, opponents, bullets, booms);
 
         mainLoop:
         while (true) {
@@ -55,31 +50,29 @@ public class Main {
 
             screen.clear();
 
+            // user actions
             if (key != null && key.getKeyType() == ArrowUp) {
-                if (startRow > 0) {
-                    startRow--;
-                }
+                player.moveUp();
             } else if (key != null && key.getKeyType() == ArrowDown) {
-                if (startRow + 5 < terminal.getTerminalSize().getRows()) {
-                    startRow++;
-                }
+                player.moveDown(terminal.getTerminalSize().getRows());
             } else if (key != null && key.getKeyType() == Tab) {
-                bullets.add(new Bullet(startRow + (planeHeight / 2), 6));
+                bullets.add(new Bullet(player));
             }
 
-            tg.drawTriangle(new TerminalPosition(1, startRow), new TerminalPosition(1, startRow + 4), new TerminalPosition(4, startRow + 2), '*');
+            gui.drawPlayer();
 
-            List<Bullet> tmpBullets = new ArrayList<Bullet>(bullets);
-            List<Opponent> tmpOpponents = new ArrayList<Opponent>(opponents);
+            // fixme: array copying
+            tmpBullets = new ArrayList<Bullet>(bullets);
+            tmpOpponents = new ArrayList<Opponent>(opponents);
 
             for (Bullet bullet : tmpBullets) {
                 if (bullet.getColumn() == terminal.getTerminalSize().getColumns()) {
                     bullets.remove(bullet);
                 } else {
-                    bullet.getColumn()++;
-                    tg.putString(new TerminalPosition(bullet.getColumn(), bullet.getRow()), "*");
+                    bullet.setColumn(bullet.getColumn() + 1);
                 }
             }
+            gui.drawBullets();
 
             wave++;
             if (wave % 100 == 0) {
@@ -91,24 +84,24 @@ public class Main {
                     opponents.remove(opponent);
                 } else {
                     if (wave % 5 == 0) {
-                        opponent.getColumn()--;
+                        opponent.setColumn(opponent.getColumn() - 1);
                     }
-                    tg.drawRectangle(new TerminalPosition(opponent.getColumn(), opponent.getRow()), new TerminalSize(5, 3), '<');
                 }
             }
+            gui.drawOpponents();
 
             tmpBullets = new ArrayList<Bullet>(bullets);
             tmpOpponents = new ArrayList<Opponent>(opponents);
 
             for (Opponent opponent : tmpOpponents) {
                 for (Bullet bullet : tmpBullets) {
-                    if (bullet.getRow() >= opponent.getRow() && bullet.getRow() <= opponent.getRow() + 2 && bullet.getColumn() == opponent.getColumn()) {
+                    if (opponent.isIntersect(bullet)) {
                         bullets.remove(bullet);
                         opponents.remove(opponent);
                         booms.add(new Boom(bullet.getRow(), bullet.getColumn()));
                     }
                 }
-                if (opponent.getRow() + 2 >= startRow && opponent.getRow() <= startRow + 4 && opponent.getColumn() <= 3) {
+                if (opponent.isIntersect(player)) {
                     lifes--;
                     if (lifes == 0) {
                         break mainLoop;
@@ -125,14 +118,14 @@ public class Main {
                     booms.remove(boom);
                 } else {
                     if (wave % 10 == 0) {
-                        boom.getColumn()--;
-                        boom.getDistanceOfFlying()--;
+                        boom.setColumn(boom.getColumn() - 1);
+                        boom.setDistanceOfFlying(boom.getDistanceOfFlying() - 1);
                     }
-                    tg.putString(new TerminalPosition(boom.getColumn(), boom.getRow()), "BOOM!!!");
                 }
             }
+            gui.drawBooms();
 
-            tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, 1), "Life: " + lifes);
+            gui.drawLife(lifes);
 
             screen.refresh();
 
@@ -141,7 +134,7 @@ public class Main {
 
         screen.clear();
 
-        tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, terminal.getTerminalSize().getRows() / 2), "GAME OVER !!!");
+        gui.drawGameOver();
 
         screen.refresh();
 

@@ -3,20 +3,26 @@ package com.company.home.entities;
 public class Boom extends MovableEntity {
 
     private final static int DEFAULT_FLYING_DISTANCE = 3;
+    private final static int DEFAULT_BOOM_HEIGHT = 1;
+    private final static int DEFAULT_BOOM_WIDTH = 1;
 
-    private final int distanceOfFlying;
+    private int distanceOfFlying;
 
-    public Boom(int row, int column, int height, int width) {
-        super(row, column,height,width);
-        this.getDistanceOfFlying() = DEFAULT_FLYING_DISTANCE;
+    public Boom(int row, int column) {
+        super(row, column, DEFAULT_BOOM_HEIGHT, DEFAULT_BOOM_WIDTH);
+        this.distanceOfFlying = DEFAULT_FLYING_DISTANCE;
     }
 
-    public Boom(int row, int column, int height, int width, int distanceOfFlying) {
-        super(row, column, height, width);
-        this.getDistanceOfFlying() = distanceOfFlying;
+    public Boom(int row, int column, int distanceOfFlying) {
+        super(row, column, DEFAULT_BOOM_HEIGHT, DEFAULT_BOOM_WIDTH);
+        this.distanceOfFlying = distanceOfFlying;
     }
 
     public int getDistanceOfFlying() {
         return distanceOfFlying;
+    }
+
+    public void setDistanceOfFlying(int distanceOfFlying) {
+        this.distanceOfFlying = distanceOfFlying;
     }
 }

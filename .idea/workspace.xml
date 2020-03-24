@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d44ab94-d30d-40dd-83bc-46162cacd905" name="Default Changelist" comment="" />
+    <list default="true" id="9d44ab94-d30d-40dd-83bc-46162cacd905" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/company/home/gui/Gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Boom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Boom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/entities/MovableEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/MovableEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Opponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Opponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/company/home/Boom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/company/home/Bullet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/company/home/GameEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/company/home/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/home/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/company/home/Opponent.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +29,14 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop/latest" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -22,6 +45,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1ZU3bKrxLtnIF0vysTfzuGH1A65" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -29,6 +55,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowStatistic.ShowToolbar" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/com/company/home" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -82,10 +109,10 @@
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="423" y="189" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1009@0.23.1920.1009" timestamp="1584882235865" />
-    <state x="773" y="250" key="#com.intellij.ide.util.MemberChooser" timestamp="1585073785637">
+    <state x="773" y="250" key="#com.intellij.ide.util.MemberChooser" timestamp="1585077943941">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state x="773" y="250" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1009@0.23.1920.1009" timestamp="1585073785637" />
+    <state x="773" y="250" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1009@0.23.1920.1009" timestamp="1585077943941" />
     <state x="696" y="318" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1584882235043">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
@@ -118,22 +145,22 @@
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="723" y="238" key="#xdebugger.evaluate/0.23.1920.1009@0.23.1920.1009" timestamp="1584884232097" />
-    <state width="1878" height="207" key="GridCell.Tab.0.bottom" timestamp="1584912313068">
+    <state width="1878" height="207" key="GridCell.Tab.0.bottom" timestamp="1585081954847">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="207" key="GridCell.Tab.0.bottom/0.23.1920.1009@0.23.1920.1009" timestamp="1584912313068" />
-    <state width="1878" height="207" key="GridCell.Tab.0.center" timestamp="1584912313067">
+    <state width="1878" height="207" key="GridCell.Tab.0.bottom/0.23.1920.1009@0.23.1920.1009" timestamp="1585081954847" />
+    <state width="1878" height="207" key="GridCell.Tab.0.center" timestamp="1585081954846">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="207" key="GridCell.Tab.0.center/0.23.1920.1009@0.23.1920.1009" timestamp="1584912313067" />
-    <state width="1878" height="207" key="GridCell.Tab.0.left" timestamp="1584912313067">
+    <state width="1878" height="207" key="GridCell.Tab.0.center/0.23.1920.1009@0.23.1920.1009" timestamp="1585081954846" />
+    <state width="1878" height="207" key="GridCell.Tab.0.left" timestamp="1585081954846">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="207" key="GridCell.Tab.0.left/0.23.1920.1009@0.23.1920.1009" timestamp="1584912313067" />
-    <state width="1878" height="207" key="GridCell.Tab.0.right" timestamp="1584912313068">
+    <state width="1878" height="207" key="GridCell.Tab.0.left/0.23.1920.1009@0.23.1920.1009" timestamp="1585081954845" />
+    <state width="1878" height="207" key="GridCell.Tab.0.right" timestamp="1585081954846">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="207" key="GridCell.Tab.0.right/0.23.1920.1009@0.23.1920.1009" timestamp="1584912313068" />
+    <state width="1878" height="207" key="GridCell.Tab.0.right/0.23.1920.1009@0.23.1920.1009" timestamp="1585081954846" />
     <state width="1899" height="338" key="GridCell.Tab.1.bottom" timestamp="1584886847264">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
@@ -166,10 +193,10 @@
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="100" y="123" width="1720" height="809" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.23.1920.1009@0.23.1920.1009" timestamp="1584901561244" />
-    <state x="569" y="252" width="782" height="550" key="find.popup" timestamp="1585073818054">
+    <state x="569" y="252" width="782" height="550" key="find.popup" timestamp="1585076476565">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state x="569" y="252" width="782" height="550" key="find.popup/0.23.1920.1009@0.23.1920.1009" timestamp="1585073818054" />
+    <state x="569" y="252" width="782" height="550" key="find.popup/0.23.1920.1009@0.23.1920.1009" timestamp="1585076476565" />
     <state x="625" y="244" key="run.anything.popup" timestamp="1584881609319">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
