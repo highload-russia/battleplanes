@@ -4,10 +4,10 @@ import com.company.home.entities.*;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Gui {
@@ -21,6 +21,7 @@ public class Gui {
 
     public Gui(TextGraphics tg,
                Terminal terminal,
+               Screen screen,
                Player player,
                List<Opponent> opponents,
                List<Bullet> bullets,
@@ -31,14 +32,6 @@ public class Gui {
         this.opponents = opponents;
         this.bullets = bullets;
         this.booms = booms;
-    }
-
-    public void addOpponent(Opponent opponent) {
-        this.opponents.add(opponent);
-    }
-
-    public void addBullet(Bullet bullet) {
-        this.bullets.add(bullet);
     }
 
     public void drawPlayer() {
@@ -82,6 +75,20 @@ public class Gui {
     public void drawGameOver() {
         try {
             tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, terminal.getTerminalSize().getRows() / 2), "GAME OVER !!!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void redraw(Screen screen) {
+        screen.clear();
+        this.drawPlayer();
+        this.drawBullets();
+        this.drawOpponents();
+        this.drawBooms();
+        this.drawLife(player.getLifes());
+        try {
+            screen.refresh();
         } catch (IOException e) {
             e.printStackTrace();
         }

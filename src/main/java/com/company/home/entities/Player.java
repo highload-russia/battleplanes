@@ -2,15 +2,16 @@ package com.company.home.entities;
 
 public class Player extends MovableEntity {
 
+    public final static int DEFAULT_PLAYER_LIFES = 5;
+
     private final static int DEFAULT_PLAYER_HEIGHT = 5;
     private final static int DEFAULT_PLAYER_WIDTH = 4;
 
-    public Player(int row, int column, int height, int width) {
-        super(row, column, height, width);
-    }
+    private int lifes;
 
-    public Player(int row, int column) {
+    public Player(int row, int column, int lifes) {
         super(row, column, DEFAULT_PLAYER_HEIGHT, DEFAULT_PLAYER_WIDTH);
+        this.lifes = lifes;
     }
 
     public void moveUp() {
@@ -20,9 +21,16 @@ public class Player extends MovableEntity {
     }
 
     public void moveDown(int maxHeight) {
-        if (this.getRow() + this.getHeight() - 1 < maxHeight) {
+        if (this.getRow() + this.getHeight() < maxHeight) {
             this.setRow(this.getRow() + 1);
         }
     }
 
+    public int getLifes() {
+        return lifes;
+    }
+
+    public void setLifes(int lifes) {
+        this.lifes = lifes;
+    }
 }

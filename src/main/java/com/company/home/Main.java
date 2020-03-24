@@ -16,6 +16,7 @@ import com.googlecode.lanterna.screen.*;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
+import static com.company.home.entities.Player.DEFAULT_PLAYER_LIFES;
 import static com.googlecode.lanterna.input.KeyType.*;
 
 public class Main {
@@ -29,9 +30,7 @@ public class Main {
 
         screen.startScreen();
 
-        int lifes = 5;
-
-        Player player = new Player((screen.getTerminalSize().getRows() / 2), 1);
+        Player player = new Player((screen.getTerminalSize().getRows() / 2), 1, DEFAULT_PLAYER_LIFES);
         KeyStroke ks = new KeyStroke(ArrowUp);
 
         List<Bullet> bullets = new ArrayList<Bullet>();
@@ -41,16 +40,13 @@ public class Main {
         List<Opponent> tmpOpponents;
         long wave = 1L;
 
-        Gui gui = new Gui(tg, terminal, player, opponents, bullets, booms);
+        Gui gui = new Gui(tg, terminal, screen, player, opponents, bullets, booms);
 
         mainLoop:
         while (true) {
 
-            KeyStroke key = terminal.pollInput();
-
-            screen.clear();
-
             // user actions
+            KeyStroke key = terminal.pollInput();
             if (key != null && key.getKeyType() == ArrowUp) {
                 player.moveUp();
             } else if (key != null && key.getKeyType() == ArrowDown) {
@@ -58,8 +54,6 @@ public class Main {
             } else if (key != null && key.getKeyType() == Tab) {
                 bullets.add(new Bullet(player));
             }
-
-            gui.drawPlayer();
 
             // fixme: array copying
             tmpBullets = new ArrayList<Bullet>(bullets);
@@ -72,7 +66,6 @@ public class Main {
                     bullet.setColumn(bullet.getColumn() + 1);
                 }
             }
-            gui.drawBullets();
 
             wave++;
             if (wave % 100 == 0) {
@@ -88,7 +81,6 @@ public class Main {
                     }
                 }
             }
-            gui.drawOpponents();
 
             tmpBullets = new ArrayList<Bullet>(bullets);
             tmpOpponents = new ArrayList<Opponent>(opponents);
@@ -102,8 +94,8 @@ public class Main {
                     }
                 }
                 if (opponent.isIntersect(player)) {
-                    lifes--;
-                    if (lifes == 0) {
+                    player.setLifes(player.getLifes() - 1);
+                    if (player.getLifes() == 0) {
                         break mainLoop;
                     }
                     opponents.remove(opponent);
@@ -123,19 +115,14 @@ public class Main {
                     }
                 }
             }
-            gui.drawBooms();
 
-            gui.drawLife(lifes);
-
-            screen.refresh();
+            gui.redraw(screen);
 
             Thread.sleep(10);
         }
 
         screen.clear();
-
         gui.drawGameOver();
-
         screen.refresh();
 
     }
