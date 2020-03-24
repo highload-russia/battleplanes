@@ -13,11 +13,6 @@ public class Boom extends MovableEntity {
         this.distanceOfFlying = DEFAULT_FLYING_DISTANCE;
     }
 
-    public Boom(int row, int column, int distanceOfFlying) {
-        super(row, column, DEFAULT_BOOM_HEIGHT, DEFAULT_BOOM_WIDTH);
-        this.distanceOfFlying = distanceOfFlying;
-    }
-
     public int getDistanceOfFlying() {
         return distanceOfFlying;
     }
