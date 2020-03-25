@@ -64,9 +64,9 @@ public class Gui {
         }
     }
 
-    public void drawLife(int lifes) {
+    public void drawLife() {
         try {
-            tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, 1), "Life: " + lifes);
+            tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, 1), "Life: " + player.getLifes());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,7 +86,7 @@ public class Gui {
         this.drawBullets();
         this.drawOpponents();
         this.drawBooms();
-        this.drawLife(player.getLifes());
+        this.drawLife();
         try {
             screen.refresh();
         } catch (IOException e) {
