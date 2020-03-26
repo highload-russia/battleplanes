@@ -14,7 +14,7 @@ public class Opponent extends MovableEntity {
         this.energy = 0;
     }
 
-    public void processMovement() {
+    public void move() {
         if (this.energy == this.speed){
             this.energy = 0;
             this.setColumn(this.getColumn() - 1);

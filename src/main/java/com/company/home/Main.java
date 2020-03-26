@@ -5,52 +5,37 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.company.home.entities.Boom;
-import com.company.home.entities.Bullet;
-import com.company.home.entities.Opponent;
-import com.company.home.entities.Player;
+import com.company.home.entities.*;
 import com.company.home.gui.Gui;
-import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.screen.*;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
 import one.util.streamex.StreamEx;
 
 import static com.company.home.entities.Player.DEFAULT_PLAYER_LIFES;
+import static com.company.home.services.GameService.*;
 import static com.googlecode.lanterna.input.KeyType.*;
 
 public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        Terminal terminal = new DefaultTerminalFactory().createTerminal();
-        int terminalHeight = terminal.getTerminalSize().getRows();
-        int terminalWidth = terminal.getTerminalSize().getColumns();
-        Screen screen = new TerminalScreen(terminal);
-        TextGraphics tg = screen.newTextGraphics();
+        Player player = new Player(10, 1, DEFAULT_PLAYER_LIFES);
 
-        screen.startScreen();
+        List<MovableEntity> bullets = new ArrayList<>();
+        List<MovableEntity> opponents = new ArrayList<>();
+        List<MovableEntity> booms = new ArrayList<>();
 
-        Player player = new Player((terminalHeight / 2), 1, DEFAULT_PLAYER_LIFES);
-
-        List<Bullet> bullets = new ArrayList<>();
-        List<Bullet> bulletsToRemove;
-        List<Opponent> opponents = new ArrayList<>();
-        List<Opponent> opponentsToRemove;
-        List<Boom> booms = new ArrayList<Boom>();
-        List<Boom> boomsToRemove = new ArrayList<>();
-        List<Bullet> tmpBullets = new ArrayList<>();
-        List<Opponent> tmpOpponents = new ArrayList<>();
         long wave = 1L;
 
-        Gui gui = new Gui(tg, terminal, screen, player, opponents, bullets, booms);
+        Gui gui = new Gui(player, opponents, bullets, booms);
+        int terminalHeight = gui.getTerminal().getTerminalSize().getRows();
+        int terminalWidth = gui.getTerminal().getTerminalSize().getColumns();
+        gui.init();
 
         mainLoop:
         while (true) {
 
             // process user action
-            KeyStroke key = terminal.pollInput();
+            KeyStroke key = gui.getTerminal().pollInput();
             if (key != null && key.getKeyType() == ArrowUp) {
                 player.moveUp();
             } else if (key != null && key.getKeyType() == ArrowDown) {
@@ -59,38 +44,23 @@ public class Main {
                 bullets.add(new Bullet(player));
             }
 
-            // fixme: array copying
-      //      tmpOpponents = new ArrayList<Opponent>(opponents);
+            // process bullets
+            StreamEx.of(bullets).filterBy(MovableEntity::getColumn, terminalWidth).forEach(MovableEntity::markToRemove);
 
-            bulletsToRemove = StreamEx.of(bullets).filterBy(Bullet::getColumn, terminalWidth).toList();
-            bullets.removeAll(bulletsToRemove);
-            StreamEx.of(bullets)
-                    .forEach(bullet -> {
-                        bullet.setColumn(bullet.getColumn() + 1);
-                    });
-
-            System.out.println(bullets.size() + "-" + (bullets.size() == 0 ? -1 : bullets.get(0).getColumn()) + "-" + terminalWidth);
-
+            // process opponents
             wave++;
             if (wave % 100 == 0) {
                 opponents.add(new Opponent(new Random().nextInt(terminalHeight - 2), terminalWidth, 5));
+                wave = 0;
             }
 
-            opponentsToRemove = StreamEx.of(opponents).filterBy(Opponent::getColumn, 0).toList();
-            opponents.removeAll(opponentsToRemove);
-            StreamEx.of(opponents).forEach(Opponent::processMovement);
+            StreamEx.of(opponents).filterBy(MovableEntity::getColumn, 0).forEach(MovableEntity::markToRemove);
 
-           tmpBullets = new ArrayList<Bullet>(bullets);
-            tmpOpponents = new ArrayList<Opponent>(opponents);
-
-/*            opponentsToRemove = StreamEx.of(opponents).filter(opponent -> (StreamEx.of(bullets).findFirst(bullet -> bullet.isIntersect(opponent)).isPresent())).toList();
-            bulletsToRemove = StreamEx.of(bullets).filter(bullet -> (StreamEx.of(opponentsToRemove).findFirst(opponent -> opponent.isIntersect(bullet)).isPresent())).toList();*/
-
-            for (Opponent opponent : tmpOpponents) {
-                for (Bullet bullet : tmpBullets) {
+            for (MovableEntity opponent : opponents) {
+                for (MovableEntity bullet : bullets) {
                     if (opponent.isIntersect(bullet)) {
-                        bullets.remove(bullet);
-                        opponents.remove(opponent);
+                        bullet.markToRemove();
+                        opponent.markToRemove();
                         booms.add(new Boom(bullet.getRow(), bullet.getColumn(), 10));
                     }
                 }
@@ -99,25 +69,25 @@ public class Main {
                     if (player.getLifes() == 0) {
                         break mainLoop;
                     }
-                    opponents.remove(opponent);
+                    opponent.markToRemove();
                     booms.add(new Boom(opponent.getRow(), opponent.getColumn(), 10));
                 }
             }
 
-            boomsToRemove = StreamEx.of(booms)
-                    .filter(boom -> (boom.getColumn() == 0 || boom.getDistanceOfFlying() == 0))
-                    .toList();
-            booms.removeAll(boomsToRemove);
-            StreamEx.of(booms).forEach(Boom::processMovement);
+            // process booms
+            StreamEx.of(booms)
+                    .filter(boom -> (boom.getColumn() == 0 || ((Boom) boom).getDistanceOfFlying() == 0))
+                    .forEach(MovableEntity::markToRemove);
 
-            gui.redraw(screen);
+            removeObsolete(bullets, opponents, booms);
+            move(bullets, opponents, booms);
+
+            gui.redraw();
 
             Thread.sleep(10);
         }
 
-        screen.clear();
         gui.drawGameOver();
-        screen.refresh();
 
     }
 }

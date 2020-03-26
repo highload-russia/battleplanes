@@ -6,12 +6,14 @@ public abstract class MovableEntity {
     private int column;
     private int height;
     private int width;
+    private boolean markedToRemove;
 
     public MovableEntity(int row, int column, int height, int width) {
         this.row = row;
         this.column = column;
         this.height = height;
         this.width = width;
+        this.markedToRemove = false;
     }
 
     public int getRow() {
@@ -36,6 +38,16 @@ public abstract class MovableEntity {
 
     public int getWidth() {
         return width;
+    }
+
+    public boolean isMarkedToRemove() {
+        return markedToRemove;
+    }
+
+    public abstract void move();
+
+    public void markToRemove() {
+        this.markedToRemove = true;
     }
 
     public boolean isIntersect(MovableEntity movableEntity) {

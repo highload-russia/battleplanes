@@ -33,4 +33,7 @@ public class Player extends MovableEntity {
     public void setLifes(int lifes) {
         this.lifes = lifes;
     }
+
+    public void move() {
+    }
 }

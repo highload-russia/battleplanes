@@ -21,7 +21,7 @@ public class Boom extends MovableEntity {
         return distanceOfFlying;
     }
 
-    public void processMovement() {
+    public void move() {
         if (this.energy == this.speed){
             this.energy = 0;
             this.setColumn(this.getColumn() - 1);

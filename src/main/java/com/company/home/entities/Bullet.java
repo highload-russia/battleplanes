@@ -9,4 +9,8 @@ public class Bullet extends MovableEntity {
         super(player.getRow() + ((player.getHeight() - 1) / 2), 6, DEFAULT_BULLET_HEIGHT, DEFAULT_BULLET_WIDTH);
     }
 
+    public void move() {
+        this.setColumn(this.getColumn() + 1);
+    }
+
 }
