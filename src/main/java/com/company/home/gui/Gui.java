@@ -17,9 +17,15 @@ import static com.googlecode.lanterna.input.KeyType.*;
 
 public class Gui {
 
-    private final TextGraphics tg;
+    private static final char PLAYER_DRAWING_CHARACTER = '*';
+    private static final char OPPONENT_DRAWING_CHARACTER = '<';
+    private static final String BULLET_DRAWING_STRING = "*";
+    private static final String BOOM_EVENT_LABEL = "BOOM!!!";
+    private static final String GAME_OVER_EVENT_LABEL = "GAME OVER !!!";
+
     private final Terminal terminal;
     private final Screen screen;
+    private final TextGraphics tg;
 
     public Gui() throws IOException {
         this.terminal = new DefaultTerminalFactory().createTerminal();
@@ -31,60 +37,48 @@ public class Gui {
         return terminal;
     }
 
-    public void init() {
-        try {
-            screen.startScreen();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void init() throws IOException {
+        screen.startScreen();
     }
 
     public void drawPlayer(Player player) {
-        int playerRow = player.getRow();
+        int playerRow = player.getY();
         tg.drawTriangle(
-                new TerminalPosition(1, playerRow),
-                new TerminalPosition(1, playerRow + player.getHeight() - 1),
+                new TerminalPosition(player.getX(), playerRow),
+                new TerminalPosition(player.getX(), playerRow + player.getHeight() - 1),
                 new TerminalPosition(player.getWidth(), playerRow + (player.getHeight() / 2)),
-                '*');
+                PLAYER_DRAWING_CHARACTER);
     }
 
     public void drawOpponents(List<MovableEntity> opponents) {
         for (MovableEntity opponent : opponents) {
             tg.drawRectangle(
-                    new TerminalPosition(opponent.getColumn(), opponent.getRow()),
+                    new TerminalPosition(opponent.getX(), opponent.getY()),
                     new TerminalSize(opponent.getWidth(), opponent.getHeight()),
-                    '<');
+                    OPPONENT_DRAWING_CHARACTER);
         }
     }
 
     public void drawBullets(List<MovableEntity> bullets) {
         for (MovableEntity bullet : bullets) {
-            tg.putString(new TerminalPosition(bullet.getColumn(), bullet.getRow()), "*");
+            tg.putString(new TerminalPosition(bullet.getX(), bullet.getY()), BULLET_DRAWING_STRING);
         }
     }
 
     public void drawBooms(List<MovableEntity> booms) {
         for (MovableEntity boom : booms) {
-            tg.putString(new TerminalPosition(boom.getColumn(), boom.getRow()), "BOOM!!!");
+            tg.putString(new TerminalPosition(boom.getX(), boom.getY()), BOOM_EVENT_LABEL);
         }
     }
 
-    public void drawLife(Player player) {
-        try {
-            tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, 1), "Life: " + player.getLifes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void drawLife(Player player) throws IOException {
+        tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2 - 6, 1), "Life: " + player.getLife());
     }
 
-    public void drawGameOver() {
-        try {
-            screen.clear();
-            tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, terminal.getTerminalSize().getRows() / 2), "GAME OVER !!!");
-            screen.refresh();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void drawGameOver() throws IOException {
+        screen.clear();
+        tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, terminal.getTerminalSize().getRows() / 2), GAME_OVER_EVENT_LABEL);
+        screen.refresh();
     }
 
     public PlayerAction pullUserAction() throws IOException {
@@ -102,18 +96,14 @@ public class Gui {
     public void redraw(Player player,
                        List<MovableEntity> opponents,
                        List<MovableEntity> bullets,
-                       List<MovableEntity> booms) {
+                       List<MovableEntity> booms) throws IOException {
         this.screen.clear();
         this.drawPlayer(player);
         this.drawBullets(bullets);
         this.drawOpponents(opponents);
         this.drawBooms(booms);
         this.drawLife(player);
-        try {
-            this.screen.refresh();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.screen.refresh();
     }
 
 }

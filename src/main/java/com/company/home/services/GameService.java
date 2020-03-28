@@ -1,19 +1,20 @@
 package com.company.home.services;
 
 import com.company.home.entities.*;
-import one.util.streamex.StreamEx;
 
 import java.util.List;
 import java.util.Random;
+
+import static com.company.home.entities.Opponent.FREQUENCY_OF_OPPONENT_APPEARENCE_IN_TIMESLOTS;
+import static com.company.home.entities.Opponent.OPPONENT_HEIGHT;
 
 public class GameService {
 
     private static int timeSlot = 0;
 
-    public static void processOpponents(List<MovableEntity> opponents, GameField gameField) {
-        timeSlot++;
-        if (timeSlot % 100 == 0) {
-            opponents.add(new Opponent(new Random().nextInt(gameField.getHeight() - 2), gameField.getWidth(), 5, gameField));
+    public static void generateOpponents(List<MovableEntity> opponents, GameField gameField) {
+        if (++timeSlot % FREQUENCY_OF_OPPONENT_APPEARENCE_IN_TIMESLOTS == 0) {
+            opponents.add(new Opponent(new Random().nextInt(gameField.getHeight() - (OPPONENT_HEIGHT - 1)), gameField));
             timeSlot = 0;
         }
     }
@@ -30,13 +31,9 @@ public class GameService {
 
     public static void move(List<List<MovableEntity>> allEntities) {
         for (List<MovableEntity> entities : allEntities) {
-            StreamEx.of(entities).forEach(MovableEntity::move);
-        }
-    }
-
-    public static void markToRemove(List<List<MovableEntity>> allEntities) {
-        for (List<MovableEntity> entities : allEntities) {
-            StreamEx.of(entities).forEach(MovableEntity::markToRemove);
+            for (MovableEntity entity : entities) {
+                entity.move();
+            }
         }
     }
 
@@ -50,20 +47,18 @@ public class GameService {
                 if (opponent.isIntersect(bullet)) {
                     bullet.setMarkedToRemove();
                     opponent.setMarkedToRemove();
-                    booms.add(new Boom(bullet.getRow(), bullet.getColumn(), 10, gameField));
+                    booms.add(new Boom(bullet.getX(), bullet.getY(), gameField));
                 }
             }
             if (opponent.isIntersect(player)) {
-                player.setLifes(player.getLifes() - 1);
+                player.setLife(player.getLife() - 1);
                 opponent.setMarkedToRemove();
-                booms.add(new Boom(opponent.getRow(), opponent.getColumn(), 10, gameField));
+                booms.add(new Boom(opponent.getX(), opponent.getY(), gameField));
             }
         }
     }
 
     public static void removeObsolete(List<List<MovableEntity>> allEntities) {
-        markToRemove(allEntities);
-
         for (List<MovableEntity> entities : allEntities) {
             entities.removeIf(MovableEntity::isMarkedToRemove);
         }

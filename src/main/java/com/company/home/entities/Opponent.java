@@ -2,29 +2,28 @@ package com.company.home.entities;
 
 public class Opponent extends MovableEntity {
 
-    private final static int DEFAULT_OPPONENT_HEIGHT = 3;
-    private final static int DEFAULT_OPPONENT_WIDTH = 5;
+    public final static int FREQUENCY_OF_OPPONENT_APPEARENCE_IN_TIMESLOTS = 100;
+    public final static int OPPONENT_HEIGHT = 3;
+    public final static int OPPONENT_WIDTH = 5;
 
-    private final int speed;
-    private int energy;
+    private final static int FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS = 5;
 
-    public Opponent(int row, int column, int speed, GameField gameField) {
-        super(row, column, DEFAULT_OPPONENT_HEIGHT, DEFAULT_OPPONENT_WIDTH, gameField);
-        this.speed = speed;
-        this.energy = 0;
+    private int timeSlotsAwaiting;
+
+    public Opponent(int y, GameField gameField) {
+        super(gameField.getWidth(), y, OPPONENT_WIDTH, OPPONENT_HEIGHT, gameField);
+        this.timeSlotsAwaiting = 0;
     }
 
     public void move() {
-        if (this.energy == this.speed){
-            this.energy = 0;
-            this.setColumn(this.getColumn() - 1);
+        if (this.timeSlotsAwaiting == FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS) {
+            this.timeSlotsAwaiting = 0;
+            this.setX(this.getX() - 1);
         } else {
-            this.energy++;
+            this.timeSlotsAwaiting++;
         }
-    }
 
-    public void markToRemove() {
-        if (this.getColumn() == 0) {
+        if (this.getX() == 0) {
             this.setMarkedToRemove();
         }
     }

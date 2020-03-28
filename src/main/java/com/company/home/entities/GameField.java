@@ -18,11 +18,4 @@ public class GameField {
         return height;
     }
 
-    @Override
-    public String toString() {
-        return "GameField{" +
-                "width=" + width +
-                ", height=" + height +
-                '}';
-    }
 }

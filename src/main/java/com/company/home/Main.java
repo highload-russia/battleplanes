@@ -8,7 +8,6 @@ import java.util.List;
 import com.company.home.entities.*;
 import com.company.home.gui.Gui;
 
-import static com.company.home.entities.Player.DEFAULT_PLAYER_LIFE;
 import static com.company.home.services.GameService.*;
 
 public class Main {
@@ -25,14 +24,13 @@ public class Main {
         gui.init();
         GameField gameField = new GameField(gui.getTerminal().getTerminalSize().getColumns(), gui.getTerminal().getTerminalSize().getRows());
 
-        Player player = new Player(DEFAULT_PLAYER_LIFE, gameField);
+        Player player = new Player(gameField);
 
-        while (player.getLifes() > 0) {
+        while (player.getLife() > 0) {
 
             processPlayerAction(player, bullets, gui.pullUserAction(), gameField);
-            processOpponents(opponents, gameField);
+            generateOpponents(opponents, gameField);
             processInteractions(opponents, bullets, booms, player, gameField);
-
             removeObsolete(Arrays.asList(bullets, opponents, booms));
             move(Arrays.asList(bullets, opponents, booms));
 
