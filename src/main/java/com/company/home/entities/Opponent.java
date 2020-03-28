@@ -1,5 +1,7 @@
 package com.company.home.entities;
 
+import java.util.Random;
+
 public class Opponent extends MovableEntity {
 
     public final static int FREQUENCY_OF_OPPONENT_APPEARENCE_IN_TIMESLOTS = 130;
@@ -16,7 +18,7 @@ public class Opponent extends MovableEntity {
     public Opponent(int y, GameField gameField) {
         super(gameField.getWidth(), y, OPPONENT_WIDTH, OPPONENT_HEIGHT, gameField);
         this.timeSlotsAwaitingToMove = 0;
-        this.timeSlotsAwaitingToShoot = 0;
+        this.timeSlotsAwaitingToShoot = new Random().nextInt(FREQUENCY_OF_FIRE);
         this.readyToShoot = false;
     }
 
