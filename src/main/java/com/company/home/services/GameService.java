@@ -19,6 +19,16 @@ public class GameService {
         }
     }
 
+    public static void processOpponentsAction(List<MovableEntity> opponents, List<MovableEntity> bullets, GameField gameField) {
+        for (MovableEntity opponent : opponents) {
+            Opponent tmpOpponent = (Opponent) opponent;
+            if (tmpOpponent.isReadyToShoot()) {
+                bullets.add(new EnemyBullet(tmpOpponent, gameField));
+                tmpOpponent.setReadyToShoot(false);
+            }
+        }
+    }
+
     public static void processPlayerAction(Player player, List<MovableEntity> bullets, PlayerAction playerAction, GameField gameField) {
         if (playerAction == PlayerAction.MOVE_UP) {
             player.moveUp();
@@ -42,14 +52,23 @@ public class GameService {
                                            List<MovableEntity> booms,
                                            Player player,
                                            GameField gameField) {
-        for (MovableEntity opponent : opponents) {
-            for (MovableEntity bullet : bullets) {
-                if (opponent.isIntersect(bullet)) {
+        for (MovableEntity bullet : bullets) {
+            for (MovableEntity opponent : opponents) {
+                if (opponent.isIntersect(bullet) && (bullet instanceof Bullet)) {
                     bullet.setMarkedToRemove();
                     opponent.setMarkedToRemove();
                     booms.add(new Boom(bullet.getX(), bullet.getY(), gameField));
                 }
             }
+
+            if (player.isIntersect(bullet) && (bullet instanceof EnemyBullet)) {
+                bullet.setMarkedToRemove();
+                booms.add(new Boom(bullet.getX(), bullet.getY(), gameField));
+                player.setLife(player.getLife() - 1);
+            }
+        }
+
+        for (MovableEntity opponent : opponents) {
             if (opponent.isIntersect(player)) {
                 player.setLife(player.getLife() - 1);
                 opponent.setMarkedToRemove();

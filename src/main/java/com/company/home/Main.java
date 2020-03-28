@@ -30,6 +30,7 @@ public class Main {
 
             processPlayerAction(player, bullets, gui.pullUserAction(), gameField);
             generateOpponents(opponents, gameField);
+            processOpponentsAction(opponents, bullets, gameField);
             processInteractions(opponents, bullets, booms, player, gameField);
             removeObsolete(Arrays.asList(bullets, opponents, booms));
             move(Arrays.asList(bullets, opponents, booms));
