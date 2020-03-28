@@ -4,6 +4,7 @@ import com.company.home.entities.*;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -12,27 +13,18 @@ import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
 import java.util.List;
 
+import static com.googlecode.lanterna.input.KeyType.*;
+
 public class Gui {
 
     private final TextGraphics tg;
     private final Terminal terminal;
     private final Screen screen;
-    private final Player player;
-    private final List<MovableEntity> opponents;
-    private final List<MovableEntity> bullets;
-    private final List<MovableEntity> booms;
 
-    public Gui(Player player,
-               List<MovableEntity> opponents,
-               List<MovableEntity> bullets,
-               List<MovableEntity> booms) throws IOException {
+    public Gui() throws IOException {
         this.terminal = new DefaultTerminalFactory().createTerminal();
         this.screen = new TerminalScreen(terminal);
         this.tg = screen.newTextGraphics();
-        this.player = player;
-        this.opponents = opponents;
-        this.bullets = bullets;
-        this.booms = booms;
     }
 
     public Terminal getTerminal() {
@@ -47,7 +39,7 @@ public class Gui {
         }
     }
 
-    public void drawPlayer() {
+    public void drawPlayer(Player player) {
         int playerRow = player.getRow();
         tg.drawTriangle(
                 new TerminalPosition(1, playerRow),
@@ -56,7 +48,7 @@ public class Gui {
                 '*');
     }
 
-    public void drawOpponents() {
+    public void drawOpponents(List<MovableEntity> opponents) {
         for (MovableEntity opponent : opponents) {
             tg.drawRectangle(
                     new TerminalPosition(opponent.getColumn(), opponent.getRow()),
@@ -65,19 +57,19 @@ public class Gui {
         }
     }
 
-    public void drawBullets() {
+    public void drawBullets(List<MovableEntity> bullets) {
         for (MovableEntity bullet : bullets) {
             tg.putString(new TerminalPosition(bullet.getColumn(), bullet.getRow()), "*");
         }
     }
 
-    public void drawBooms() {
+    public void drawBooms(List<MovableEntity> booms) {
         for (MovableEntity boom : booms) {
             tg.putString(new TerminalPosition(boom.getColumn(), boom.getRow()), "BOOM!!!");
         }
     }
 
-    public void drawLife() {
+    public void drawLife(Player player) {
         try {
             tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, 1), "Life: " + player.getLifes());
         } catch (IOException e) {
@@ -95,13 +87,28 @@ public class Gui {
         }
     }
 
-    public void redraw() {
+    public PlayerAction pullUserAction() throws IOException {
+        KeyStroke key = terminal.pollInput();
+        if (key != null && key.getKeyType() == ArrowUp) {
+            return PlayerAction.MOVE_UP;
+        } else if (key != null && key.getKeyType() == ArrowDown) {
+            return PlayerAction.MOVE_DOWN;
+        } else if (key != null && key.getKeyType() == Tab) {
+            return PlayerAction.SHOOT;
+        }
+        return PlayerAction.NONE;
+    }
+
+    public void redraw(Player player,
+                       List<MovableEntity> opponents,
+                       List<MovableEntity> bullets,
+                       List<MovableEntity> booms) {
         this.screen.clear();
-        this.drawPlayer();
-        this.drawBullets();
-        this.drawOpponents();
-        this.drawBooms();
-        this.drawLife();
+        this.drawPlayer(player);
+        this.drawBullets(bullets);
+        this.drawOpponents(opponents);
+        this.drawBooms(booms);
+        this.drawLife(player);
         try {
             this.screen.refresh();
         } catch (IOException e) {

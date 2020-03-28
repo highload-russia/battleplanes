@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d44ab94-d30d-40dd-83bc-46162cacd905" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/company/home/services/GameService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/GameField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/PlayerAction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Boom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Boom.java" afterDir="false" />
@@ -11,6 +12,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Opponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Opponent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/gui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/gui/Gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/services/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/services/GameService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/company/home/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/home/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,6 +23,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -131,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585175597843</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="one more refactoring">
+      <created>1585255164042</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1585255164042</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -151,7 +161,8 @@
     <MESSAGE value="some refactoring" />
     <MESSAGE value="remove unused constructors" />
     <MESSAGE value="more refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="more refactoring" />
+    <MESSAGE value="one more refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="one more refactoring" />
   </component>
   <component name="WindowStateProjectService">
     <state x="560" y="193" key="#Project_Structure" timestamp="1585167222862">
@@ -162,10 +173,10 @@
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="423" y="189" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1009@0.23.1920.1009" timestamp="1585167230420" />
-    <state x="773" y="250" key="#com.intellij.ide.util.MemberChooser" timestamp="1585253723950">
+    <state x="773" y="250" key="#com.intellij.ide.util.MemberChooser" timestamp="1585401373162">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state x="773" y="250" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1009@0.23.1920.1009" timestamp="1585253723950" />
+    <state x="773" y="250" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1009@0.23.1920.1009" timestamp="1585401373162" />
     <state x="696" y="318" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1584882235043">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
@@ -198,30 +209,30 @@
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="1137" y="341" key="#xdebugger.evaluate/0.23.1920.1009@0.23.1920.1009" timestamp="1585171545766" />
-    <state x="605" y="130" key="CommitChangelistDialog2" timestamp="1585175597292">
+    <state x="605" y="130" key="CommitChangelistDialog2" timestamp="1585255163522">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state x="605" y="130" key="CommitChangelistDialog2/0.23.1920.1009@0.23.1920.1009" timestamp="1585175597292" />
+    <state x="605" y="130" key="CommitChangelistDialog2/0.23.1920.1009@0.23.1920.1009" timestamp="1585255163522" />
     <state x="192" y="112" key="DiffContextDialog" timestamp="1585083167468">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="192" y="112" key="DiffContextDialog/0.23.1920.1009@0.23.1920.1009" timestamp="1585083167468" />
-    <state width="1878" height="259" key="GridCell.Tab.0.bottom" timestamp="1585254845436">
+    <state width="1878" height="259" key="GridCell.Tab.0.bottom" timestamp="1585401763756">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.bottom/0.23.1920.1009@0.23.1920.1009" timestamp="1585254845436" />
-    <state width="1878" height="259" key="GridCell.Tab.0.center" timestamp="1585254845435">
+    <state width="1878" height="259" key="GridCell.Tab.0.bottom/0.23.1920.1009@0.23.1920.1009" timestamp="1585401763756" />
+    <state width="1878" height="259" key="GridCell.Tab.0.center" timestamp="1585401763756">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.center/0.23.1920.1009@0.23.1920.1009" timestamp="1585254845435" />
-    <state width="1878" height="259" key="GridCell.Tab.0.left" timestamp="1585254845434">
+    <state width="1878" height="259" key="GridCell.Tab.0.center/0.23.1920.1009@0.23.1920.1009" timestamp="1585401763756" />
+    <state width="1878" height="259" key="GridCell.Tab.0.left" timestamp="1585401763755">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.left/0.23.1920.1009@0.23.1920.1009" timestamp="1585254845434" />
-    <state width="1878" height="259" key="GridCell.Tab.0.right" timestamp="1585254845436">
+    <state width="1878" height="259" key="GridCell.Tab.0.left/0.23.1920.1009@0.23.1920.1009" timestamp="1585401763755" />
+    <state width="1878" height="259" key="GridCell.Tab.0.right" timestamp="1585401763756">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.right/0.23.1920.1009@0.23.1920.1009" timestamp="1585254845436" />
+    <state width="1878" height="259" key="GridCell.Tab.0.right/0.23.1920.1009@0.23.1920.1009" timestamp="1585401763756" />
     <state width="1878" height="338" key="GridCell.Tab.1.bottom" timestamp="1585175612277">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
@@ -246,10 +257,10 @@
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="448" y="109" key="SettingsEditor/0.23.1920.1009@0.23.1920.1009" timestamp="1585167954934" />
-    <state x="560" y="256" key="Vcs.Push.Dialog.v2" timestamp="1585175602487">
+    <state x="560" y="256" key="Vcs.Push.Dialog.v2" timestamp="1585255166648">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state x="560" y="256" key="Vcs.Push.Dialog.v2/0.23.1920.1009@0.23.1920.1009" timestamp="1585175602487" />
+    <state x="560" y="256" key="Vcs.Push.Dialog.v2/0.23.1920.1009@0.23.1920.1009" timestamp="1585255166648" />
     <state x="761" y="312" key="chooseDestDirectoryDialog" timestamp="1584882698996">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
