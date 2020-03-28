@@ -10,16 +10,24 @@ public class Opponent extends MovableEntity {
     public final static int OPPONENT_WIDTH = 5;
 
     private final static int FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS = 5;
+    private final static int FREQUENCY_OF_CHANGE_DIRECTION_IN_TIMESLOTS = 30;
 
     private int timeSlotsAwaitingToMove;
+    private int timeSlotsAwaitingToChangeDirection;
     private int timeSlotsAwaitingToShoot;
+    private Player player;
     private boolean readyToShoot;
 
-    public Opponent(int y, GameField gameField) {
+    public Opponent(int y, GameField gameField, Player player) {
         super(gameField.getWidth(), y, OPPONENT_WIDTH, OPPONENT_HEIGHT, gameField);
+
+        Random random = new Random();
+
         this.timeSlotsAwaitingToMove = 0;
-        this.timeSlotsAwaitingToShoot = new Random().nextInt(FREQUENCY_OF_FIRE);
+        this.timeSlotsAwaitingToChangeDirection = random.nextInt(FREQUENCY_OF_CHANGE_DIRECTION_IN_TIMESLOTS);
+        this.timeSlotsAwaitingToShoot = random.nextInt(FREQUENCY_OF_FIRE);
         this.readyToShoot = false;
+        this.player = player;
     }
 
     public boolean isReadyToShoot() {
@@ -31,6 +39,7 @@ public class Opponent extends MovableEntity {
     }
 
     public void move() {
+
         if (this.timeSlotsAwaitingToShoot == FREQUENCY_OF_FIRE) {
             this.readyToShoot = true;
             this.timeSlotsAwaitingToShoot = 0;
@@ -41,6 +50,16 @@ public class Opponent extends MovableEntity {
         if (this.timeSlotsAwaitingToMove == FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS) {
             this.timeSlotsAwaitingToMove = 0;
             this.setX(this.getX() - 1);
+            if (this.timeSlotsAwaitingToChangeDirection == FREQUENCY_OF_CHANGE_DIRECTION_IN_TIMESLOTS) {
+                this.timeSlotsAwaitingToChangeDirection = 0;
+                if (player.getY() > this.getY()) {
+                    this.setY(this.getY() + 1);
+                } else if (player.getY() < this.getY()) {
+                    this.setY(this.getY() - 1);
+                }
+            } else {
+                this.timeSlotsAwaitingToChangeDirection++;
+            }
         } else {
             this.timeSlotsAwaitingToMove++;
         }

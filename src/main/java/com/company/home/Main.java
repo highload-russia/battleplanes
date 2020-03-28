@@ -29,7 +29,7 @@ public class Main {
         while (player.getLife() > 0) {
 
             processPlayerAction(player, bullets, gui.pullUserAction(), gameField);
-            generateOpponents(opponents, gameField);
+            generateOpponents(opponents, gameField, player);
             processOpponentsAction(opponents, bullets, gameField);
             processInteractions(opponents, bullets, booms, player, gameField);
             removeObsolete(Arrays.asList(bullets, opponents, booms));

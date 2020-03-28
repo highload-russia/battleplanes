@@ -12,9 +12,9 @@ public class GameService {
 
     private static int timeSlot = 0;
 
-    public static void generateOpponents(List<MovableEntity> opponents, GameField gameField) {
+    public static void generateOpponents(List<MovableEntity> opponents, GameField gameField, Player player) {
         if (++timeSlot % FREQUENCY_OF_OPPONENT_APPEARENCE_IN_TIMESLOTS == 0) {
-            opponents.add(new Opponent(new Random().nextInt(gameField.getHeight() - (OPPONENT_HEIGHT - 1)), gameField));
+            opponents.add(new Opponent(new Random().nextInt(gameField.getHeight() - (OPPONENT_HEIGHT - 1)), gameField, player));
             timeSlot = 0;
         }
     }

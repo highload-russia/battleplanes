@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d44ab94-d30d-40dd-83bc-46162cacd905" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Opponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Opponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/services/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/services/GameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/company/home/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/home/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585430595233</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="improve frequency of fire">
+      <created>1585430813946</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1585430813946</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -183,7 +194,8 @@
     <MESSAGE value="not bad" />
     <MESSAGE value="add enemy bullets" />
     <MESSAGE value="add distance" />
-    <option name="LAST_COMMIT_MESSAGE" value="add distance" />
+    <MESSAGE value="improve frequency of fire" />
+    <option name="LAST_COMMIT_MESSAGE" value="improve frequency of fire" />
   </component>
   <component name="WindowStateProjectService">
     <state x="560" y="193" key="#Project_Structure" timestamp="1585167222862">
@@ -230,30 +242,30 @@
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="1137" y="341" key="#xdebugger.evaluate/0.23.1920.1009@0.23.1920.1009" timestamp="1585171545766" />
-    <state x="605" y="130" key="CommitChangelistDialog2" timestamp="1585430594938">
+    <state x="605" y="130" key="CommitChangelistDialog2" timestamp="1585430813703">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state x="605" y="130" key="CommitChangelistDialog2/0.23.1920.1009@0.23.1920.1009" timestamp="1585430594938" />
-    <state x="192" y="112" key="DiffContextDialog" timestamp="1585083167468">
+    <state x="605" y="130" key="CommitChangelistDialog2/0.23.1920.1009@0.23.1920.1009" timestamp="1585430813703" />
+    <state x="192" y="112" width="1536" height="807" key="DiffContextDialog" timestamp="1585432232490">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state x="192" y="112" key="DiffContextDialog/0.23.1920.1009@0.23.1920.1009" timestamp="1585083167468" />
-    <state width="1878" height="259" key="GridCell.Tab.0.bottom" timestamp="1585430722926">
+    <state x="192" y="112" width="1536" height="807" key="DiffContextDialog/0.23.1920.1009@0.23.1920.1009" timestamp="1585432232490" />
+    <state width="1878" height="259" key="GridCell.Tab.0.bottom" timestamp="1585432284812">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.bottom/0.23.1920.1009@0.23.1920.1009" timestamp="1585430722926" />
-    <state width="1878" height="259" key="GridCell.Tab.0.center" timestamp="1585430722925">
+    <state width="1878" height="259" key="GridCell.Tab.0.bottom/0.23.1920.1009@0.23.1920.1009" timestamp="1585432284812" />
+    <state width="1878" height="259" key="GridCell.Tab.0.center" timestamp="1585432284811">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.center/0.23.1920.1009@0.23.1920.1009" timestamp="1585430722925" />
-    <state width="1878" height="259" key="GridCell.Tab.0.left" timestamp="1585430722924">
+    <state width="1878" height="259" key="GridCell.Tab.0.center/0.23.1920.1009@0.23.1920.1009" timestamp="1585432284811" />
+    <state width="1878" height="259" key="GridCell.Tab.0.left" timestamp="1585432284810">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.left/0.23.1920.1009@0.23.1920.1009" timestamp="1585430722924" />
-    <state width="1878" height="259" key="GridCell.Tab.0.right" timestamp="1585430722925">
+    <state width="1878" height="259" key="GridCell.Tab.0.left/0.23.1920.1009@0.23.1920.1009" timestamp="1585432284810" />
+    <state width="1878" height="259" key="GridCell.Tab.0.right" timestamp="1585432284812">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.right/0.23.1920.1009@0.23.1920.1009" timestamp="1585430722925" />
+    <state width="1878" height="259" key="GridCell.Tab.0.right/0.23.1920.1009@0.23.1920.1009" timestamp="1585432284812" />
     <state width="1878" height="338" key="GridCell.Tab.1.bottom" timestamp="1585419923643">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
