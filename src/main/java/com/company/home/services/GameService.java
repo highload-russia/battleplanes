@@ -35,8 +35,9 @@ public class GameService {
         } else if (playerAction == PlayerAction.MOVE_DOWN) {
             player.moveDown();
         } else if (playerAction == PlayerAction.SHOOT) {
-            bullets.add(new Bullet(player, gameField));
+            bullets.add(new PlayerBullet(player, gameField));
         }
+        player.move();
     }
 
     public static void move(List<List<MovableEntity>> allEntities) {
@@ -54,7 +55,7 @@ public class GameService {
                                            GameField gameField) {
         for (MovableEntity bullet : bullets) {
             for (MovableEntity opponent : opponents) {
-                if (opponent.isIntersect(bullet) && (bullet instanceof Bullet)) {
+                if (opponent.isIntersect(bullet) && (bullet instanceof PlayerBullet)) {
                     bullet.setMarkedToRemove();
                     opponent.setMarkedToRemove();
                     booms.add(new Boom(bullet.getX(), bullet.getY(), gameField));

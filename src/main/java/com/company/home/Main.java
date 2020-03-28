@@ -40,6 +40,6 @@ public class Main {
             Thread.sleep(REFRESH_TIME_IN_MILLISECONDS);
         }
 
-        gui.drawGameOver();
+        gui.drawGameOver(player);
     }
 }

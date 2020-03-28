@@ -72,12 +72,23 @@ public class Gui {
     }
 
     public void drawLife(Player player) throws IOException {
-        tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2 - 6, 1), "Life: " + player.getLife());
+        tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2 - 10, 1), "Life: " + player.getLife());
     }
 
-    public void drawGameOver() throws IOException {
+    public void drawDistance(Player player) throws IOException {
+        tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, 1), "Distance: " + player.getDistance());
+    }
+
+    public void drawGameOver(Player player) throws IOException {
         screen.clear();
-        tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, terminal.getTerminalSize().getRows() / 2), GAME_OVER_EVENT_LABEL);
+        tg.putString(new TerminalPosition(
+                        terminal.getTerminalSize().getColumns() / 2 - GAME_OVER_EVENT_LABEL.length() / 2,
+                        terminal.getTerminalSize().getRows() / 2 - 3),
+                GAME_OVER_EVENT_LABEL);
+        tg.putString(new TerminalPosition(
+                        terminal.getTerminalSize().getColumns() / 2 - GAME_OVER_EVENT_LABEL.length() / 2,
+                        (terminal.getTerminalSize().getRows() / 2) - 1),
+                "Distance: " + player.getDistance());
         screen.refresh();
     }
 
@@ -103,6 +114,7 @@ public class Gui {
         this.drawOpponents(opponents);
         this.drawBooms(booms);
         this.drawLife(player);
+        this.drawDistance(player);
         this.screen.refresh();
     }
 
