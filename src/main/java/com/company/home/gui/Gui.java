@@ -22,6 +22,8 @@ public class Gui {
     private static final String BULLET_DRAWING_STRING = "*";
     private static final String BOOM_EVENT_LABEL = "BOOM!!!";
     private static final String GAME_OVER_EVENT_LABEL = "GAME OVER !!!";
+    private static final String WELCOME_LABEL = "Welcome to BATTLE PLANES!";
+    private static final String MENU_LABEL = "Press \"Tab\" to restart or \"Esc\" to exit game";
 
     private final Terminal terminal;
     private final Screen screen;
@@ -79,17 +81,26 @@ public class Gui {
         tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, 1), "Distance: " + player.getDistance());
     }
 
-    public void drawGameOver(Player player) throws IOException {
+    public void drawMenu() throws IOException {
+        int firstLabelRow = terminal.getTerminalSize().getRows() / 2 - 3;
         screen.clear();
-        tg.putString(new TerminalPosition(
-                        terminal.getTerminalSize().getColumns() / 2 - GAME_OVER_EVENT_LABEL.length() / 2,
-                        terminal.getTerminalSize().getRows() / 2 - 3),
-                GAME_OVER_EVENT_LABEL);
-        tg.putString(new TerminalPosition(
-                        terminal.getTerminalSize().getColumns() / 2 - GAME_OVER_EVENT_LABEL.length() / 2,
-                        (terminal.getTerminalSize().getRows() / 2) - 1),
-                "Distance: " + player.getDistance());
+        tg.putString(new TerminalPosition(getColumnByLabel(WELCOME_LABEL), firstLabelRow), WELCOME_LABEL);
+        tg.putString(new TerminalPosition(getColumnByLabel(MENU_LABEL), firstLabelRow + 2), MENU_LABEL);
         screen.refresh();
+    }
+
+    public void drawGameOver(Player player) throws IOException {
+        String distanceLabel = "Distance: " + player.getDistance();
+        int firstLabelRow = terminal.getTerminalSize().getRows() / 2 - 3;
+        screen.clear();
+        tg.putString(new TerminalPosition(getColumnByLabel(GAME_OVER_EVENT_LABEL), firstLabelRow), GAME_OVER_EVENT_LABEL);
+        tg.putString(new TerminalPosition(getColumnByLabel(distanceLabel), firstLabelRow + 2), distanceLabel);
+        tg.putString(new TerminalPosition(getColumnByLabel(MENU_LABEL), firstLabelRow + 4), MENU_LABEL);
+        screen.refresh();
+    }
+
+    private int getColumnByLabel(String label) throws IOException {
+        return terminal.getTerminalSize().getColumns() / 2 - label.length() / 2;
     }
 
     public PlayerAction pullUserAction() throws IOException {
@@ -100,8 +111,20 @@ public class Gui {
             return PlayerAction.MOVE_DOWN;
         } else if (key != null && key.getKeyType() == Tab) {
             return PlayerAction.SHOOT;
+        } else if (key != null && key.getKeyType() == Escape) {
+            return PlayerAction.EXIT;
         }
         return PlayerAction.NONE;
+    }
+
+    public MenuAction pullMenuAction() throws IOException {
+        KeyStroke key = terminal.pollInput();
+        if (key != null && key.getKeyType() == Tab) {
+            return MenuAction.START;
+        } else if (key != null && key.getKeyType() == Escape) {
+            return MenuAction.EXIT;
+        }
+        return MenuAction.NONE;
     }
 
     public void redraw(Player player,
@@ -118,4 +141,7 @@ public class Gui {
         this.screen.refresh();
     }
 
+    public void exit() throws IOException {
+        screen.close();
+    }
 }

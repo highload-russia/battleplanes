@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d44ab94-d30d-40dd-83bc-46162cacd905" name="Default Changelist" comment="">
+    <list default="true" id="9d44ab94-d30d-40dd-83bc-46162cacd905" name="Default Changelist" comment="improve opponents movement. cool game now">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/MenuAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__one_util_streamex_0_7_2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BattlePlanes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BattlePlanes.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Opponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/Opponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/entities/PlayerAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/PlayerAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/gui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/gui/Gui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/services/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/services/GameService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/company/home/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/home/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -66,6 +70,9 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.company.home.entities" />
       <recent name="com.company.home" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.company.home.entities" />
     </key>
   </component>
   <component name="RunManager">
@@ -169,7 +176,21 @@
       <option name="project" value="LOCAL" />
       <updated>1585430813946</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="improve opponents movement. cool game now">
+      <created>1585432347627</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1585432347627</updated>
+    </task>
+    <task id="LOCAL-00013" summary="add gitignore">
+      <created>1585433531002</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1585433531002</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -195,7 +216,9 @@
     <MESSAGE value="add enemy bullets" />
     <MESSAGE value="add distance" />
     <MESSAGE value="improve frequency of fire" />
-    <option name="LAST_COMMIT_MESSAGE" value="improve frequency of fire" />
+    <MESSAGE value="improve opponents movement. cool game now" />
+    <MESSAGE value="add gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="add gitignore" />
   </component>
   <component name="WindowStateProjectService">
     <state x="560" y="193" key="#Project_Structure" timestamp="1585167222862">
@@ -210,6 +233,10 @@
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="773" y="250" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1009@0.23.1920.1009" timestamp="1585429582416" />
+    <state x="698" y="310" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1585490309981">
+      <screen x="0" y="23" width="1920" height="1009" />
+    </state>
+    <state x="698" y="310" key="#com.intellij.ide.util.PackageChooserDialog/0.23.1920.1009@0.23.1920.1009" timestamp="1585490309981" />
     <state x="696" y="318" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1584882235043">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
@@ -242,46 +269,46 @@
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="1137" y="341" key="#xdebugger.evaluate/0.23.1920.1009@0.23.1920.1009" timestamp="1585171545766" />
-    <state x="605" y="130" key="CommitChangelistDialog2" timestamp="1585430813703">
+    <state x="605" y="130" key="CommitChangelistDialog2" timestamp="1585433550375">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state x="605" y="130" key="CommitChangelistDialog2/0.23.1920.1009@0.23.1920.1009" timestamp="1585430813703" />
+    <state x="605" y="130" key="CommitChangelistDialog2/0.23.1920.1009@0.23.1920.1009" timestamp="1585433550375" />
     <state x="192" y="112" width="1536" height="807" key="DiffContextDialog" timestamp="1585432232490">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="192" y="112" width="1536" height="807" key="DiffContextDialog/0.23.1920.1009@0.23.1920.1009" timestamp="1585432232490" />
-    <state width="1878" height="259" key="GridCell.Tab.0.bottom" timestamp="1585432284812">
+    <state width="1878" height="259" key="GridCell.Tab.0.bottom" timestamp="1585494145086">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.bottom/0.23.1920.1009@0.23.1920.1009" timestamp="1585432284812" />
-    <state width="1878" height="259" key="GridCell.Tab.0.center" timestamp="1585432284811">
+    <state width="1878" height="259" key="GridCell.Tab.0.bottom/0.23.1920.1009@0.23.1920.1009" timestamp="1585494145086" />
+    <state width="1878" height="259" key="GridCell.Tab.0.center" timestamp="1585494145084">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.center/0.23.1920.1009@0.23.1920.1009" timestamp="1585432284811" />
-    <state width="1878" height="259" key="GridCell.Tab.0.left" timestamp="1585432284810">
+    <state width="1878" height="259" key="GridCell.Tab.0.center/0.23.1920.1009@0.23.1920.1009" timestamp="1585494145084" />
+    <state width="1878" height="259" key="GridCell.Tab.0.left" timestamp="1585494145084">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.left/0.23.1920.1009@0.23.1920.1009" timestamp="1585432284810" />
-    <state width="1878" height="259" key="GridCell.Tab.0.right" timestamp="1585432284812">
+    <state width="1878" height="259" key="GridCell.Tab.0.left/0.23.1920.1009@0.23.1920.1009" timestamp="1585494145084" />
+    <state width="1878" height="259" key="GridCell.Tab.0.right" timestamp="1585494145085">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.right/0.23.1920.1009@0.23.1920.1009" timestamp="1585432284812" />
-    <state width="1878" height="338" key="GridCell.Tab.1.bottom" timestamp="1585419923643">
+    <state width="1878" height="259" key="GridCell.Tab.0.right/0.23.1920.1009@0.23.1920.1009" timestamp="1585494145085" />
+    <state width="1878" height="338" key="GridCell.Tab.1.bottom" timestamp="1585492011712">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="338" key="GridCell.Tab.1.bottom/0.23.1920.1009@0.23.1920.1009" timestamp="1585419923643" />
-    <state width="1878" height="338" key="GridCell.Tab.1.center" timestamp="1585419923642">
+    <state width="1878" height="338" key="GridCell.Tab.1.bottom/0.23.1920.1009@0.23.1920.1009" timestamp="1585492011712" />
+    <state width="1878" height="338" key="GridCell.Tab.1.center" timestamp="1585492011711">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="338" key="GridCell.Tab.1.center/0.23.1920.1009@0.23.1920.1009" timestamp="1585419923642" />
-    <state width="1878" height="338" key="GridCell.Tab.1.left" timestamp="1585419923642">
+    <state width="1878" height="338" key="GridCell.Tab.1.center/0.23.1920.1009@0.23.1920.1009" timestamp="1585492011711" />
+    <state width="1878" height="338" key="GridCell.Tab.1.left" timestamp="1585492011711">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="338" key="GridCell.Tab.1.left/0.23.1920.1009@0.23.1920.1009" timestamp="1585419923642" />
-    <state width="1878" height="338" key="GridCell.Tab.1.right" timestamp="1585419923642">
+    <state width="1878" height="338" key="GridCell.Tab.1.left/0.23.1920.1009@0.23.1920.1009" timestamp="1585492011711" />
+    <state width="1878" height="338" key="GridCell.Tab.1.right" timestamp="1585492011711">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="338" key="GridCell.Tab.1.right/0.23.1920.1009@0.23.1920.1009" timestamp="1585419923642" />
+    <state width="1878" height="338" key="GridCell.Tab.1.right/0.23.1920.1009@0.23.1920.1009" timestamp="1585492011711" />
     <state x="612" y="356" key="Maven.ArtifactSearchDialog" timestamp="1584888457056">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>

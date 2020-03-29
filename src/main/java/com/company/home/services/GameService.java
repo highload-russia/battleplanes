@@ -1,7 +1,11 @@
 package com.company.home.services;
 
 import com.company.home.entities.*;
+import com.company.home.gui.Gui;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -10,7 +14,43 @@ import static com.company.home.entities.Opponent.OPPONENT_HEIGHT;
 
 public class GameService {
 
+    private static final int REFRESH_TIME_IN_MILLISECONDS = 10;
+
     private static int timeSlot = 0;
+
+    public static MenuAction pullMenuAction(Gui gui) throws IOException, InterruptedException {
+        MenuAction menuAction = MenuAction.NONE;
+        while (menuAction == MenuAction.NONE) {
+            menuAction = gui.pullMenuAction();
+            Thread.sleep(REFRESH_TIME_IN_MILLISECONDS);
+        }
+        return menuAction;
+    }
+
+    public static void playGame(Gui gui) throws IOException, InterruptedException {
+        GameField gameField = new GameField(gui.getTerminal().getTerminalSize().getColumns(), gui.getTerminal().getTerminalSize().getRows());
+
+        Player player = new Player(gameField);
+        List<MovableEntity> bullets = new ArrayList<>();
+        List<MovableEntity> opponents = new ArrayList<>();
+        List<MovableEntity> booms = new ArrayList<>();
+
+        while (player.getLife() > 0) {
+
+            processPlayerAction(player, bullets, gui.pullUserAction(), gameField);
+            generateOpponents(opponents, gameField, player);
+            processOpponentsAction(opponents, bullets, gameField);
+            processInteractions(opponents, bullets, booms, player, gameField);
+            removeObsolete(Arrays.asList(bullets, opponents, booms));
+            move(Arrays.asList(bullets, opponents, booms));
+
+            gui.redraw(player, opponents, bullets, booms);
+
+            Thread.sleep(REFRESH_TIME_IN_MILLISECONDS);
+        }
+
+        gui.drawGameOver(player);
+    }
 
     public static void generateOpponents(List<MovableEntity> opponents, GameField gameField, Player player) {
         if (++timeSlot % FREQUENCY_OF_OPPONENT_APPEARENCE_IN_TIMESLOTS == 0) {
@@ -36,6 +76,8 @@ public class GameService {
             player.moveDown();
         } else if (playerAction == PlayerAction.SHOOT) {
             bullets.add(new PlayerBullet(player, gameField));
+        } else if (playerAction == PlayerAction.EXIT){
+            player.setLife(0);
         }
         player.move();
     }
