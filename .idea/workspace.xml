@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d44ab94-d30d-40dd-83bc-46162cacd905" name="Default Changelist" comment="improve opponents movement. cool game now">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/MenuAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__one_util_streamex_0_7_2.xml" beforeDir="false" />
+    <list default="true" id="9d44ab94-d30d-40dd-83bc-46162cacd905" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BattlePlanes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BattlePlanes.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/entities/PlayerAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/entities/PlayerAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/gui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/gui/Gui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/company/home/services/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/company/home/services/GameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BattlePlanes-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/BattlePlanes-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/company/home/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/company/home/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +53,6 @@
     <property name="JavaClassFindUsagesOptions.isSearchForTextOccurrences" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="ToolWindowStatistic.ShowToolbar" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/com/company/home" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -190,7 +189,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585433531002</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="add menu&#10;add start\exit actions">
+      <created>1585494320453</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1585494320454</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -218,17 +224,18 @@
     <MESSAGE value="improve frequency of fire" />
     <MESSAGE value="improve opponents movement. cool game now" />
     <MESSAGE value="add gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="add gitignore" />
+    <MESSAGE value="add menu&#10;add start\exit actions" />
+    <option name="LAST_COMMIT_MESSAGE" value="add menu&#10;add start\exit actions" />
   </component>
   <component name="WindowStateProjectService">
     <state x="560" y="193" key="#Project_Structure" timestamp="1585167222862">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="560" y="193" key="#Project_Structure/0.23.1920.1009@0.23.1920.1009" timestamp="1585167222862" />
-    <state x="423" y="189" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585167230420">
+    <state x="423" y="189" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585494941963">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state x="423" y="189" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1009@0.23.1920.1009" timestamp="1585167230420" />
+    <state x="423" y="189" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1009@0.23.1920.1009" timestamp="1585494941963" />
     <state x="773" y="250" key="#com.intellij.ide.util.MemberChooser" timestamp="1585429582416">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
@@ -269,30 +276,30 @@
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="1137" y="341" key="#xdebugger.evaluate/0.23.1920.1009@0.23.1920.1009" timestamp="1585171545766" />
-    <state x="605" y="130" key="CommitChangelistDialog2" timestamp="1585433550375">
+    <state x="605" y="130" key="CommitChangelistDialog2" timestamp="1585494320036">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state x="605" y="130" key="CommitChangelistDialog2/0.23.1920.1009@0.23.1920.1009" timestamp="1585433550375" />
+    <state x="605" y="130" key="CommitChangelistDialog2/0.23.1920.1009@0.23.1920.1009" timestamp="1585494320036" />
     <state x="192" y="112" width="1536" height="807" key="DiffContextDialog" timestamp="1585432232490">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="192" y="112" width="1536" height="807" key="DiffContextDialog/0.23.1920.1009@0.23.1920.1009" timestamp="1585432232490" />
-    <state width="1878" height="259" key="GridCell.Tab.0.bottom" timestamp="1585494145086">
+    <state width="1878" height="370" key="GridCell.Tab.0.bottom" timestamp="1585498329303">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.bottom/0.23.1920.1009@0.23.1920.1009" timestamp="1585494145086" />
-    <state width="1878" height="259" key="GridCell.Tab.0.center" timestamp="1585494145084">
+    <state width="1878" height="370" key="GridCell.Tab.0.bottom/0.23.1920.1009@0.23.1920.1009" timestamp="1585498329303" />
+    <state width="1878" height="370" key="GridCell.Tab.0.center" timestamp="1585498329302">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.center/0.23.1920.1009@0.23.1920.1009" timestamp="1585494145084" />
-    <state width="1878" height="259" key="GridCell.Tab.0.left" timestamp="1585494145084">
+    <state width="1878" height="370" key="GridCell.Tab.0.center/0.23.1920.1009@0.23.1920.1009" timestamp="1585498329302" />
+    <state width="1878" height="370" key="GridCell.Tab.0.left" timestamp="1585498329301">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.left/0.23.1920.1009@0.23.1920.1009" timestamp="1585494145084" />
-    <state width="1878" height="259" key="GridCell.Tab.0.right" timestamp="1585494145085">
+    <state width="1878" height="370" key="GridCell.Tab.0.left/0.23.1920.1009@0.23.1920.1009" timestamp="1585498329301" />
+    <state width="1878" height="370" key="GridCell.Tab.0.right" timestamp="1585498329303">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state width="1878" height="259" key="GridCell.Tab.0.right/0.23.1920.1009@0.23.1920.1009" timestamp="1585494145085" />
+    <state width="1878" height="370" key="GridCell.Tab.0.right/0.23.1920.1009@0.23.1920.1009" timestamp="1585498329303" />
     <state width="1878" height="338" key="GridCell.Tab.1.bottom" timestamp="1585492011712">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
@@ -313,10 +320,10 @@
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
     <state x="612" y="356" key="Maven.ArtifactSearchDialog/0.23.1920.1009@0.23.1920.1009" timestamp="1584888457056" />
-    <state x="448" y="109" key="SettingsEditor" timestamp="1585167954934">
+    <state x="448" y="109" key="SettingsEditor" timestamp="1585494532579">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>
-    <state x="448" y="109" key="SettingsEditor/0.23.1920.1009@0.23.1920.1009" timestamp="1585167954934" />
+    <state x="448" y="109" key="SettingsEditor/0.23.1920.1009@0.23.1920.1009" timestamp="1585494532579" />
     <state x="560" y="256" key="Vcs.Push.Dialog.v2" timestamp="1585401957243">
       <screen x="0" y="23" width="1920" height="1009" />
     </state>

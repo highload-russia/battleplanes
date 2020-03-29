@@ -1,5 +1,12 @@
 com/company/home/Main.class
-com/company/home/Opponent.class
-com/company/home/GameEntity.class
-com/company/home/Bullet.class
-com/company/home/Boom.class
+com/company/home/entities/MovableEntity.class
+com/company/home/entities/EnemyBullet.class
+com/company/home/entities/Boom.class
+com/company/home/entities/GameField.class
+com/company/home/entities/Player.class
+com/company/home/gui/Gui.class
+com/company/home/services/GameService.class
+com/company/home/entities/Opponent.class
+com/company/home/entities/PlayerAction.class
+com/company/home/entities/PlayerBullet.class
+com/company/home/entities/MenuAction.class

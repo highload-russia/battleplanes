@@ -1,5 +1,12 @@
-/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/GameEntity.java
-/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/Bullet.java
-/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/Opponent.java
-/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/Boom.java
+/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/entities/PlayerBullet.java
+/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/entities/Player.java
+/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/gui/Gui.java
+/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/entities/Boom.java
+/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/entities/GameField.java
+/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/services/GameService.java
+/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/entities/PlayerAction.java
 /Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/Main.java
+/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/entities/MovableEntity.java
+/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/entities/Opponent.java
+/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/entities/EnemyBullet.java
+/Users/alexeyivanov/IdeaProjects/BattlePlanes/src/main/java/com/company/home/entities/MenuAction.java
