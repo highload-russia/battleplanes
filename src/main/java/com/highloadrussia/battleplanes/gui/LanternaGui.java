@@ -29,7 +29,7 @@ public class LanternaGui implements Gui {
     private static final String BOOM_EVENT_LABEL = "BOOM!!!";
     private static final String GAME_OVER_EVENT_LABEL = "GAME OVER !!!";
     private static final String WELCOME_LABEL = "Welcome to BATTLE PLANES!";
-    private static final String MENU_LABEL = "Press \"Tab\" to restart or \"Esc\" to exit game";
+    private static final String MENU_LABEL = "Press \"Tab\" to start and shoot or \"Esc\" to exit game";
 
     private final Terminal terminal;
     private final Screen screen;
