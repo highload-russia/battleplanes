@@ -37,7 +37,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.highloadrussia.battleplanes.Main</mainClass>
+                            <mainClass>com.highloadrussia.battleplanes.BattlePlanes</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

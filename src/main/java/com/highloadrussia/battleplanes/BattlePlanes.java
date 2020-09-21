@@ -7,7 +7,7 @@ import com.highloadrussia.battleplanes.gui.LanternaGui;
 import com.highloadrussia.battleplanes.entities.MenuAction;
 import com.highloadrussia.battleplanes.services.GameService;
 
-public class Main {
+public class BattlePlanes {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
