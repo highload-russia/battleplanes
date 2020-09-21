@@ -1,6 +1,9 @@
-package com.company.home.gui;
+package com.highloadrussia.battleplanes.gui;
 
-import com.company.home.entities.*;
+import com.highloadrussia.battleplanes.entities.MenuAction;
+import com.highloadrussia.battleplanes.entities.MovableEntity;
+import com.highloadrussia.battleplanes.entities.Player;
+import com.highloadrussia.battleplanes.entities.PlayerAction;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -13,9 +16,12 @@ import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
 import java.util.List;
 
-import static com.googlecode.lanterna.input.KeyType.*;
+import static com.googlecode.lanterna.input.KeyType.ArrowDown;
+import static com.googlecode.lanterna.input.KeyType.ArrowUp;
+import static com.googlecode.lanterna.input.KeyType.Escape;
+import static com.googlecode.lanterna.input.KeyType.Tab;
 
-public class Gui {
+public class LanternaGui implements Gui {
 
     private static final char PLAYER_DRAWING_CHARACTER = '*';
     private static final char OPPONENT_DRAWING_CHARACTER = '<';
@@ -29,20 +35,33 @@ public class Gui {
     private final Screen screen;
     private final TextGraphics tg;
 
-    public Gui() throws IOException {
+    private final int heightInRows;
+    private final int widthInColumns;
+
+    public LanternaGui() throws IOException {
         this.terminal = new DefaultTerminalFactory().createTerminal();
         this.screen = new TerminalScreen(terminal);
         this.tg = screen.newTextGraphics();
+        this.heightInRows = this.terminal.getTerminalSize().getRows();
+        this.widthInColumns = this.terminal.getTerminalSize().getColumns();
     }
 
-    public Terminal getTerminal() {
-        return terminal;
+    @Override
+    public int getHeightInRows() {
+        return heightInRows;
     }
 
+    @Override
+    public int getWidthInColumns() {
+        return widthInColumns;
+    }
+
+    @Override
     public void init() throws IOException {
         screen.startScreen();
     }
 
+    @Override
     public void drawPlayer(Player player) {
         int playerRow = player.getY();
         tg.drawTriangle(
@@ -52,6 +71,7 @@ public class Gui {
                 PLAYER_DRAWING_CHARACTER);
     }
 
+    @Override
     public void drawOpponents(List<MovableEntity> opponents) {
         for (MovableEntity opponent : opponents) {
             tg.drawRectangle(
@@ -61,26 +81,31 @@ public class Gui {
         }
     }
 
+    @Override
     public void drawBullets(List<MovableEntity> bullets) {
         for (MovableEntity bullet : bullets) {
             tg.putString(new TerminalPosition(bullet.getX(), bullet.getY()), BULLET_DRAWING_STRING);
         }
     }
 
+    @Override
     public void drawBooms(List<MovableEntity> booms) {
         for (MovableEntity boom : booms) {
             tg.putString(new TerminalPosition(boom.getX(), boom.getY()), BOOM_EVENT_LABEL);
         }
     }
 
+    @Override
     public void drawLife(Player player) throws IOException {
         tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2 - 10, 1), "Life: " + player.getLife());
     }
 
+    @Override
     public void drawDistance(Player player) throws IOException {
         tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, 1), "Distance: " + player.getDistance());
     }
 
+    @Override
     public void drawMenu() throws IOException {
         int firstLabelRow = terminal.getTerminalSize().getRows() / 2 - 3;
         screen.clear();
@@ -89,6 +114,7 @@ public class Gui {
         screen.refresh();
     }
 
+    @Override
     public void drawGameOver(Player player) throws IOException {
         String distanceLabel = "Distance: " + player.getDistance();
         int firstLabelRow = terminal.getTerminalSize().getRows() / 2 - 3;
@@ -103,6 +129,7 @@ public class Gui {
         return terminal.getTerminalSize().getColumns() / 2 - label.length() / 2;
     }
 
+    @Override
     public PlayerAction pullUserAction() throws IOException {
         KeyStroke key = terminal.pollInput();
         if (key != null && key.getKeyType() == ArrowUp) {
@@ -117,6 +144,7 @@ public class Gui {
         return PlayerAction.NONE;
     }
 
+    @Override
     public MenuAction pullMenuAction() throws IOException {
         KeyStroke key = terminal.pollInput();
         if (key != null && key.getKeyType() == Tab) {
@@ -127,20 +155,22 @@ public class Gui {
         return MenuAction.NONE;
     }
 
+    @Override
     public void redraw(Player player,
                        List<MovableEntity> opponents,
                        List<MovableEntity> bullets,
                        List<MovableEntity> booms) throws IOException {
-        this.screen.clear();
-        this.drawPlayer(player);
-        this.drawBullets(bullets);
-        this.drawOpponents(opponents);
-        this.drawBooms(booms);
-        this.drawLife(player);
-        this.drawDistance(player);
-        this.screen.refresh();
+        screen.clear();
+        drawPlayer(player);
+        drawBullets(bullets);
+        drawOpponents(opponents);
+        drawBooms(booms);
+        drawLife(player);
+        drawDistance(player);
+        screen.refresh();
     }
 
+    @Override
     public void exit() throws IOException {
         screen.close();
     }

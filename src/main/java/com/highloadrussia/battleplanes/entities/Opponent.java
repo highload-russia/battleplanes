@@ -1,10 +1,10 @@
-package com.company.home.entities;
+package com.highloadrussia.battleplanes.entities;
 
 import java.util.Random;
 
 public class Opponent extends MovableEntity {
 
-    public final static int FREQUENCY_OF_OPPONENT_APPEARENCE_IN_TIMESLOTS = 130;
+    public final static int FREQUENCY_OF_OPPONENT_APPEARANCE_IN_TIMESLOTS = 130;
     public final static int FREQUENCY_OF_FIRE = 200;
     public final static int OPPONENT_HEIGHT = 3;
     public final static int OPPONENT_WIDTH = 5;
@@ -15,7 +15,7 @@ public class Opponent extends MovableEntity {
     private int timeSlotsAwaitingToMove;
     private int timeSlotsAwaitingToChangeDirection;
     private int timeSlotsAwaitingToShoot;
-    private Player player;
+    private final Player player;
     private boolean readyToShoot;
 
     public Opponent(int y, GameField gameField, Player player) {

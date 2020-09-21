@@ -1,4 +1,4 @@
-package com.company.home.entities;
+package com.highloadrussia.battleplanes.entities;
 
 public enum PlayerAction {
     MOVE_UP,

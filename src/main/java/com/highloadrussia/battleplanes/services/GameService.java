@@ -1,7 +1,15 @@
-package com.company.home.services;
+package com.highloadrussia.battleplanes.services;
 
-import com.company.home.entities.*;
-import com.company.home.gui.Gui;
+import com.highloadrussia.battleplanes.entities.Boom;
+import com.highloadrussia.battleplanes.entities.EnemyBullet;
+import com.highloadrussia.battleplanes.entities.GameField;
+import com.highloadrussia.battleplanes.entities.MenuAction;
+import com.highloadrussia.battleplanes.entities.MovableEntity;
+import com.highloadrussia.battleplanes.entities.Opponent;
+import com.highloadrussia.battleplanes.entities.Player;
+import com.highloadrussia.battleplanes.entities.PlayerAction;
+import com.highloadrussia.battleplanes.entities.PlayerBullet;
+import com.highloadrussia.battleplanes.gui.Gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,8 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static com.company.home.entities.Opponent.FREQUENCY_OF_OPPONENT_APPEARENCE_IN_TIMESLOTS;
-import static com.company.home.entities.Opponent.OPPONENT_HEIGHT;
+import static com.highloadrussia.battleplanes.entities.Opponent.FREQUENCY_OF_OPPONENT_APPEARANCE_IN_TIMESLOTS;
+import static com.highloadrussia.battleplanes.entities.Opponent.OPPONENT_HEIGHT;
 
 public class GameService {
 
@@ -28,7 +36,7 @@ public class GameService {
     }
 
     public static void playGame(Gui gui) throws IOException, InterruptedException {
-        GameField gameField = new GameField(gui.getTerminal().getTerminalSize().getColumns(), gui.getTerminal().getTerminalSize().getRows());
+        GameField gameField = new GameField(gui.getWidthInColumns(), gui.getHeightInRows());
 
         Player player = new Player(gameField);
         List<MovableEntity> bullets = new ArrayList<>();
@@ -46,6 +54,7 @@ public class GameService {
 
             gui.redraw(player, opponents, bullets, booms);
 
+            //noinspection BusyWait
             Thread.sleep(REFRESH_TIME_IN_MILLISECONDS);
         }
 
@@ -53,7 +62,7 @@ public class GameService {
     }
 
     public static void generateOpponents(List<MovableEntity> opponents, GameField gameField, Player player) {
-        if (++timeSlot % FREQUENCY_OF_OPPONENT_APPEARENCE_IN_TIMESLOTS == 0) {
+        if (++timeSlot % FREQUENCY_OF_OPPONENT_APPEARANCE_IN_TIMESLOTS == 0) {
             opponents.add(new Opponent(new Random().nextInt(gameField.getHeight() - (OPPONENT_HEIGHT - 1)), gameField, player));
             timeSlot = 0;
         }
@@ -76,7 +85,7 @@ public class GameService {
             player.moveDown();
         } else if (playerAction == PlayerAction.SHOOT) {
             bullets.add(new PlayerBullet(player, gameField));
-        } else if (playerAction == PlayerAction.EXIT){
+        } else if (playerAction == PlayerAction.EXIT) {
             player.setLife(0);
         }
         player.move();
