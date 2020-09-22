@@ -1,6 +1,6 @@
 package com.highloadrussia.battleplanes.services;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.highloadrussia.battleplanes.entities.GameField;
 import com.highloadrussia.battleplanes.entities.MovableEntity;
@@ -8,7 +8,7 @@ import com.highloadrussia.battleplanes.entities.Player;
 
 import java.util.ArrayList;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class GameServiceTest {
     @Test
