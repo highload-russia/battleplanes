@@ -1,4 +1,5 @@
 .idea/
 target/
+.diffblue/
 *.iml
 *.DS_Store
