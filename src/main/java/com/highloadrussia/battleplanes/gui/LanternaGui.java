@@ -1,9 +1,5 @@
 package com.highloadrussia.battleplanes.gui;
 
-import com.highloadrussia.battleplanes.entities.MenuAction;
-import com.highloadrussia.battleplanes.entities.MovableEntity;
-import com.highloadrussia.battleplanes.entities.Player;
-import com.highloadrussia.battleplanes.entities.PlayerAction;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -12,6 +8,12 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.highloadrussia.battleplanes.entities.Boom;
+import com.highloadrussia.battleplanes.entities.MenuAction;
+import com.highloadrussia.battleplanes.entities.MovableEntity;
+import com.highloadrussia.battleplanes.entities.Opponent;
+import com.highloadrussia.battleplanes.entities.Player;
+import com.highloadrussia.battleplanes.entities.PlayerAction;
 
 import java.io.IOException;
 import java.util.List;
@@ -72,8 +74,8 @@ public class LanternaGui implements Gui {
     }
 
     @Override
-    public void drawOpponents(List<MovableEntity> opponents) {
-        for (MovableEntity opponent : opponents) {
+    public void drawOpponents(List<Opponent> opponents) {
+        for (Opponent opponent : opponents) {
             tg.drawRectangle(
                     new TerminalPosition(opponent.getX(), opponent.getY()),
                     new TerminalSize(opponent.getWidth(), opponent.getHeight()),
@@ -89,7 +91,7 @@ public class LanternaGui implements Gui {
     }
 
     @Override
-    public void drawBooms(List<MovableEntity> booms) {
+    public void drawBooms(List<Boom> booms) {
         for (MovableEntity boom : booms) {
             tg.putString(new TerminalPosition(boom.getX(), boom.getY()), BOOM_EVENT_LABEL);
         }
@@ -157,9 +159,9 @@ public class LanternaGui implements Gui {
 
     @Override
     public void redraw(Player player,
-                       List<MovableEntity> opponents,
+                       List<Opponent> opponents,
                        List<MovableEntity> bullets,
-                       List<MovableEntity> booms) throws IOException {
+                       List<Boom> booms) throws IOException {
         screen.clear();
         drawPlayer(player);
         drawBullets(bullets);

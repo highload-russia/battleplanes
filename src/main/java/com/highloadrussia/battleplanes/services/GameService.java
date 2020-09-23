@@ -39,9 +39,10 @@ public class GameService {
         GameField gameField = new GameField(gui.getWidthInColumns(), gui.getHeightInRows());
 
         Player player = new Player(gameField);
+
         List<MovableEntity> bullets = new ArrayList<>();
-        List<MovableEntity> opponents = new ArrayList<>();
-        List<MovableEntity> booms = new ArrayList<>();
+        List<Opponent> opponents = new ArrayList<>();
+        List<Boom> booms = new ArrayList<>();
 
         while (player.getLife() > 0) {
 
@@ -61,19 +62,18 @@ public class GameService {
         gui.drawGameOver(player);
     }
 
-    public static void generateOpponents(List<MovableEntity> opponents, GameField gameField, Player player) {
+    public static void generateOpponents(List<Opponent> opponents, GameField gameField, Player player) {
         if (++timeSlot % FREQUENCY_OF_OPPONENT_APPEARANCE_IN_TIMESLOTS == 0) {
             opponents.add(new Opponent(new Random().nextInt(gameField.getHeight() - (OPPONENT_HEIGHT - 1)), gameField, player));
             timeSlot = 0;
         }
     }
 
-    public static void processOpponentsAction(List<MovableEntity> opponents, List<MovableEntity> bullets, GameField gameField) {
-        for (MovableEntity opponent : opponents) {
-            Opponent tmpOpponent = (Opponent) opponent;
-            if (tmpOpponent.isReadyToShoot()) {
-                bullets.add(new EnemyBullet(tmpOpponent, gameField));
-                tmpOpponent.setReadyToShoot(false);
+    public static void processOpponentsAction(List<Opponent> opponents, List<MovableEntity> bullets, GameField gameField) {
+        for (Opponent opponent : opponents) {
+            if (opponent.isReadyToShoot()) {
+                bullets.add(new EnemyBullet(opponent, gameField));
+                opponent.setReadyToShoot(false);
             }
         }
     }
@@ -91,17 +91,17 @@ public class GameService {
         player.move();
     }
 
-    public static void move(List<List<MovableEntity>> allEntities) {
-        for (List<MovableEntity> entities : allEntities) {
+    public static void move(List<List<? extends MovableEntity>> allEntities) {
+        for (List<? extends MovableEntity> entities : allEntities) {
             for (MovableEntity entity : entities) {
                 entity.move();
             }
         }
     }
 
-    public static void processInteractions(List<MovableEntity> opponents,
+    public static void processInteractions(List<Opponent> opponents,
                                            List<MovableEntity> bullets,
-                                           List<MovableEntity> booms,
+                                           List<Boom> booms,
                                            Player player,
                                            GameField gameField) {
         for (MovableEntity bullet : bullets) {
@@ -129,8 +129,8 @@ public class GameService {
         }
     }
 
-    public static void removeObsolete(List<List<MovableEntity>> allEntities) {
-        for (List<MovableEntity> entities : allEntities) {
+    public static void removeObsolete(List<List<? extends MovableEntity>> allEntities) {
+        for (List<? extends MovableEntity> entities : allEntities) {
             entities.removeIf(MovableEntity::isMarkedToRemove);
         }
     }

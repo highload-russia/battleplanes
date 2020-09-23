@@ -1,9 +1,6 @@
 package com.highloadrussia.battleplanes.gui;
 
-import com.highloadrussia.battleplanes.entities.MenuAction;
-import com.highloadrussia.battleplanes.entities.MovableEntity;
-import com.highloadrussia.battleplanes.entities.Player;
-import com.highloadrussia.battleplanes.entities.PlayerAction;
+import com.highloadrussia.battleplanes.entities.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,11 +14,11 @@ public interface Gui {
 
     void drawPlayer(Player player);
 
-    void drawOpponents(List<MovableEntity> opponents);
+    void drawOpponents(List<Opponent> opponents);
 
     void drawBullets(List<MovableEntity> bullets);
 
-    void drawBooms(List<MovableEntity> booms);
+    void drawBooms(List<Boom> booms);
 
     void drawLife(Player player) throws IOException;
 
@@ -32,9 +29,9 @@ public interface Gui {
     void drawGameOver(Player player) throws IOException;
 
     void redraw(Player player,
-                List<MovableEntity> opponents,
+                List<Opponent> opponents,
                 List<MovableEntity> bullets,
-                List<MovableEntity> booms) throws IOException;
+                List<Boom> booms) throws IOException;
 
     void exit() throws IOException;
 
