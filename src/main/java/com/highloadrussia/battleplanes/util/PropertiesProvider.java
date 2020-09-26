@@ -32,4 +32,8 @@ public class PropertiesProvider {
     public static String getStringValue(String propertyName) {
         return appProps.getProperty(propertyName);
     }
+
+    public static char getCharValue(String propertyName){
+        return appProps.getProperty(propertyName).charAt(0);
+    }
 }

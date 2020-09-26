@@ -14,6 +14,7 @@ import com.highloadrussia.battleplanes.entities.MovableEntity;
 import com.highloadrussia.battleplanes.entities.Opponent;
 import com.highloadrussia.battleplanes.entities.Player;
 import com.highloadrussia.battleplanes.entities.PlayerAction;
+import com.highloadrussia.battleplanes.util.PropertiesProvider;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,13 +26,13 @@ import static com.googlecode.lanterna.input.KeyType.Tab;
 
 public class LanternaGui implements Gui {
 
-    private static final char PLAYER_DRAWING_CHARACTER = '*';
-    private static final char OPPONENT_DRAWING_CHARACTER = '<';
-    private static final String BULLET_DRAWING_STRING = "*";
-    private static final String BOOM_EVENT_LABEL = "BOOM!!!";
-    private static final String GAME_OVER_EVENT_LABEL = "GAME OVER !!!";
-    private static final String WELCOME_LABEL = "Welcome to BATTLE PLANES!";
-    private static final String MENU_LABEL = "Press \"Tab\" to start and shoot or \"Esc\" to exit game";
+    private static final char PLAYER_DRAWING_CHARACTER = PropertiesProvider.getCharValue("player.drawing.character");
+    private static final char OPPONENT_DRAWING_CHARACTER = PropertiesProvider.getCharValue("opponent.drawing.character");
+    private static final String BULLET_DRAWING_STRING = PropertiesProvider.getStringValue("bullet.drawing.string");
+    private static final String BOOM_EVENT_LABEL = PropertiesProvider.getStringValue("boom.event.label");
+    private static final String GAME_OVER_EVENT_LABEL = PropertiesProvider.getStringValue("game.over.event.label");
+    private static final String WELCOME_LABEL = PropertiesProvider.getStringValue("welcome.label");
+    private static final String MENU_LABEL = PropertiesProvider.getStringValue("menu.label");
 
     private final Terminal terminal;
     private final Screen screen;

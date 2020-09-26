@@ -1,12 +1,15 @@
 package com.highloadrussia.battleplanes.entities;
 
+import com.highloadrussia.battleplanes.util.PropertiesProvider;
+
 public class Player extends MovableEntity {
 
-    private final static int PLAYER_LIFE = 5;
-    private final static int PLAYER_X_POSITION = 1;
-    private final static int PLAYER_HEIGHT = 5;
-    private final static int PLAYER_WIDTH = 4;
-    private final static int FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS = 10;
+    private final static int PLAYER_HEIGHT = PropertiesProvider.getIntValue("player.height");
+    private final static int PLAYER_WIDTH = PropertiesProvider.getIntValue("player.width");
+
+    private final static int PLAYER_LIFE = PropertiesProvider.getIntValue("player.life");
+    private final static int PLAYER_X_POSITION = PropertiesProvider.getIntValue("player.x.position");
+    private final static int FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS = PropertiesProvider.getIntValue("player.frequency.of.movement.in.timeslots");
 
     private int life;
     private long distanceInTimeSlots;

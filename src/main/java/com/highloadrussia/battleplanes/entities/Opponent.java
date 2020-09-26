@@ -1,16 +1,19 @@
 package com.highloadrussia.battleplanes.entities;
 
+import com.highloadrussia.battleplanes.util.PropertiesProvider;
+
 import java.util.Random;
 
 public class Opponent extends MovableEntity {
 
-    public final static int FREQUENCY_OF_OPPONENT_APPEARANCE_IN_TIMESLOTS = 130;
-    public final static int FREQUENCY_OF_FIRE = 200;
-    public final static int OPPONENT_HEIGHT = 3;
-    public final static int OPPONENT_WIDTH = 5;
+    public final static int OPPONENT_HEIGHT = PropertiesProvider.getIntValue("opponent.height");
+    public final static int OPPONENT_WIDTH = PropertiesProvider.getIntValue("opponent.width");
 
-    private final static int FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS = 5;
-    private final static int FREQUENCY_OF_CHANGE_DIRECTION_IN_TIMESLOTS = 30;
+    public final static int FREQUENCY_OF_OPPONENT_APPEARANCE_IN_TIMESLOTS = PropertiesProvider.getIntValue("opponent.frequency.of.appearance.in.timeslots");
+    public final static int FREQUENCY_OF_FIRE = PropertiesProvider.getIntValue("opponent.frequency.of.fire");
+
+    private final static int FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS = PropertiesProvider.getIntValue("opponent.frequency.of.movement.in.timeslots");
+    private final static int FREQUENCY_OF_CHANGE_DIRECTION_IN_TIMESLOTS = PropertiesProvider.getIntValue("opponent.frequency.of.change.direction.in.timeslots");
 
     private int timeSlotsAwaitingToMove;
     private int timeSlotsAwaitingToChangeDirection;
