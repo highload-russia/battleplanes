@@ -9,6 +9,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.highloadrussia.battleplanes.entities.Boom;
+import com.highloadrussia.battleplanes.entities.Game;
 import com.highloadrussia.battleplanes.entities.MenuAction;
 import com.highloadrussia.battleplanes.entities.MovableEntity;
 import com.highloadrussia.battleplanes.entities.Opponent;
@@ -28,6 +29,7 @@ public class LanternaGui implements Gui {
 
     private static final char PLAYER_DRAWING_CHARACTER = PropertiesProvider.getCharValue("player.drawing.character");
     private static final char OPPONENT_DRAWING_CHARACTER = PropertiesProvider.getCharValue("opponent.drawing.character");
+
     private static final String BULLET_DRAWING_STRING = PropertiesProvider.getStringValue("bullet.drawing.string");
     private static final String BOOM_EVENT_LABEL = PropertiesProvider.getStringValue("boom.event.label");
     private static final String GAME_OVER_EVENT_LABEL = PropertiesProvider.getStringValue("game.over.event.label");
@@ -118,8 +120,8 @@ public class LanternaGui implements Gui {
     }
 
     @Override
-    public void drawGameOver(Player player) throws IOException {
-        String distanceLabel = "Distance: " + player.getDistance();
+    public void drawGameOver(long distance) throws IOException {
+        String distanceLabel = "Distance: " + distance;
         int firstLabelRow = terminal.getTerminalSize().getRows() / 2 - 3;
         screen.clear();
         tg.putString(new TerminalPosition(getColumnByLabel(GAME_OVER_EVENT_LABEL), firstLabelRow), GAME_OVER_EVENT_LABEL);
@@ -133,7 +135,7 @@ public class LanternaGui implements Gui {
     }
 
     @Override
-    public PlayerAction pullUserAction() throws IOException {
+    public PlayerAction pullPlayerAction() throws IOException {
         KeyStroke key = terminal.pollInput();
         if (key != null && key.getKeyType() == ArrowUp) {
             return PlayerAction.MOVE_UP;
@@ -159,17 +161,14 @@ public class LanternaGui implements Gui {
     }
 
     @Override
-    public void redraw(Player player,
-                       List<Opponent> opponents,
-                       List<MovableEntity> bullets,
-                       List<Boom> booms) throws IOException {
+    public void redraw(Game game) throws IOException {
         screen.clear();
-        drawPlayer(player);
-        drawBullets(bullets);
-        drawOpponents(opponents);
-        drawBooms(booms);
-        drawLife(player);
-        drawDistance(player);
+        drawPlayer(game.getPlayer());
+        drawBullets(game.getBullets());
+        drawOpponents(game.getOpponents());
+        drawBooms(game.getBooms());
+        drawLife(game.getPlayer());
+        drawDistance(game.getPlayer());
         screen.refresh();
     }
 

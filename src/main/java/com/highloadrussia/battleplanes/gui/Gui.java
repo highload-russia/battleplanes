@@ -26,16 +26,13 @@ public interface Gui {
 
     void drawMenu() throws IOException;
 
-    void drawGameOver(Player player) throws IOException;
+    void drawGameOver(long distance) throws IOException;
 
-    void redraw(Player player,
-                List<Opponent> opponents,
-                List<MovableEntity> bullets,
-                List<Boom> booms) throws IOException;
+    void redraw(Game game) throws IOException;
 
     void exit() throws IOException;
 
-    PlayerAction pullUserAction() throws IOException;
+    PlayerAction pullPlayerAction() throws IOException;
 
     MenuAction pullMenuAction() throws IOException;
 }
