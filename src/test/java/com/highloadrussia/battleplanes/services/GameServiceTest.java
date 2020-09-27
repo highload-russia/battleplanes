@@ -1,13 +1,6 @@
 package com.highloadrussia.battleplanes.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import com.highloadrussia.battleplanes.entities.GameField;
-import com.highloadrussia.battleplanes.entities.MovableEntity;
-import com.highloadrussia.battleplanes.entities.Opponent;
-import com.highloadrussia.battleplanes.entities.Player;
-
-import java.util.ArrayList;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 

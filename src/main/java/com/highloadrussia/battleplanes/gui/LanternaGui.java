@@ -8,13 +8,8 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import com.highloadrussia.battleplanes.entities.Boom;
-import com.highloadrussia.battleplanes.entities.Game;
-import com.highloadrussia.battleplanes.entities.MenuAction;
-import com.highloadrussia.battleplanes.entities.MovableEntity;
-import com.highloadrussia.battleplanes.entities.Opponent;
-import com.highloadrussia.battleplanes.entities.Player;
-import com.highloadrussia.battleplanes.entities.PlayerAction;
+import com.highloadrussia.battleplanes.entities.*;
+import com.highloadrussia.battleplanes.entities.Enemy;
 import com.highloadrussia.battleplanes.util.PropertiesProvider;
 
 import java.io.IOException;
@@ -28,7 +23,7 @@ import static com.googlecode.lanterna.input.KeyType.Tab;
 public class LanternaGui implements Gui {
 
     private static final char PLAYER_DRAWING_CHARACTER = PropertiesProvider.getCharValue("player.drawing.character");
-    private static final char OPPONENT_DRAWING_CHARACTER = PropertiesProvider.getCharValue("opponent.drawing.character");
+    private static final char ENEMY_DRAWING_CHARACTER = PropertiesProvider.getCharValue("enemy.drawing.character");
 
     private static final String BULLET_DRAWING_STRING = PropertiesProvider.getStringValue("bullet.drawing.string");
     private static final String BOOM_EVENT_LABEL = PropertiesProvider.getStringValue("boom.event.label");
@@ -77,12 +72,12 @@ public class LanternaGui implements Gui {
     }
 
     @Override
-    public void drawOpponents(List<Opponent> opponents) {
-        for (Opponent opponent : opponents) {
+    public void drawEnemies(List<Enemy> enemies) {
+        for (Enemy enemy : enemies) {
             tg.drawRectangle(
-                    new TerminalPosition(opponent.getX(), opponent.getY()),
-                    new TerminalSize(opponent.getWidth(), opponent.getHeight()),
-                    OPPONENT_DRAWING_CHARACTER);
+                    new TerminalPosition(enemy.getX(), enemy.getY()),
+                    new TerminalSize(enemy.getWidth(), enemy.getHeight()),
+                    ENEMY_DRAWING_CHARACTER);
         }
     }
 
@@ -165,7 +160,7 @@ public class LanternaGui implements Gui {
         screen.clear();
         drawPlayer(game.getPlayer());
         drawBullets(game.getBullets());
-        drawOpponents(game.getOpponents());
+        drawEnemies(game.getEnemies());
         drawBooms(game.getBooms());
         drawLife(game.getPlayer());
         drawDistance(game.getPlayer());

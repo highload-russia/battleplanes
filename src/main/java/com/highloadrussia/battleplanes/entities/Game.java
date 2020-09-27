@@ -1,12 +1,10 @@
 package com.highloadrussia.battleplanes.entities;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import com.highloadrussia.battleplanes.entities.factories.EnemyFactory;
 
-import static com.highloadrussia.battleplanes.entities.Opponent.FREQUENCY_OF_OPPONENT_APPEARANCE_IN_TIMESLOTS;
-import static com.highloadrussia.battleplanes.entities.Opponent.OPPONENT_HEIGHT;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class Game {
 
@@ -14,14 +12,15 @@ public class Game {
 
     private final GameField gameField;
     private final Player player;
-    private final List<Opponent> opponents;
+
+    private final List<Enemy> enemies;
     private final List<MovableEntity> bullets;
     private final List<Boom> booms;
 
     public Game(int gameFieldWidthInColumns, int gameFieldHeightInColumns) {
         this.gameField = new GameField(gameFieldWidthInColumns, gameFieldHeightInColumns);
         this.player = new Player(gameField);
-        this.opponents = new ArrayList<>();
+        this.enemies = new ArrayList<>();
         this.bullets = new ArrayList<>();
         this.booms = new ArrayList<>();
     }
@@ -34,8 +33,8 @@ public class Game {
         return player;
     }
 
-    public List<Opponent> getOpponents() {
-        return opponents;
+    public List<Enemy> getEnemies() {
+        return enemies;
     }
 
     public List<MovableEntity> getBullets() {
@@ -46,86 +45,84 @@ public class Game {
         return booms;
     }
 
+    public int getTimeSlot() {
+        return timeSlot;
+    }
+
+    public void setTimeSlot(int timeSlot) {
+        this.timeSlot = timeSlot;
+    }
+
     public void move(PlayerAction playerAction) {
-        processPlayerAction(playerAction);
-        generateOpponents();
-        processOpponentsAction();
+        doPlayerAction(playerAction);
+        createEnemies();
+        doEnemiesAction();
         processInteractions();
-        removeObsolete(Arrays.asList(bullets, opponents, booms));
-        move(Arrays.asList(bullets, opponents, booms));
+        removeDestroyed();
+        moveUnits();
+
+        timeSlot++;
     }
 
-    private void generateOpponents() {
-        if (++timeSlot % FREQUENCY_OF_OPPONENT_APPEARANCE_IN_TIMESLOTS == 0) {
-            opponents.add(new Opponent(new Random().nextInt(gameField.getHeight() - (OPPONENT_HEIGHT - 1)), gameField, player));
-            timeSlot = 0;
-        }
-    }
-
-    private void processOpponentsAction() {
-        for (Opponent opponent : opponents) {
-            if (opponent.isReadyToShoot()) {
-                bullets.add(new EnemyBullet(opponent, gameField));
-                opponent.setReadyToShoot(false);
-            }
-        }
-    }
-
-    private void processPlayerAction(PlayerAction playerAction) {
-        switch (playerAction) {
-            case MOVE_UP:
-                player.moveUp();
-                break;
-            case MOVE_DOWN:
-                player.moveDown();
-                break;
-            case SHOOT:
-                bullets.add(new PlayerBullet(player, gameField));
-                break;
-            case EXIT:
-                player.setLife(0);
-                break;
-        }
+    private void moveUnits() {
         player.move();
+        bullets.forEach(MovableEntity::move);
+        enemies.forEach(MovableEntity::move);
+        booms.forEach(MovableEntity::move);
+    }
+
+    private void createEnemies() {
+        Enemy enemy = EnemyFactory.createEnemy(this);
+
+        if (enemy != null) {
+            enemies.add(enemy);
+        }
+    }
+
+    private void doEnemiesAction() {
+        enemies.stream()
+                .map(Enemy::tryShoot)
+                .filter(Objects::nonNull)
+                .forEach(bullets::add);
+    }
+
+    private void doPlayerAction(PlayerAction playerAction) {
+        PlayerBullet bullet = player.doAction(playerAction);
+
+        if (bullet != null) {
+            bullets.add(bullet);
+        }
     }
 
     private void processInteractions() {
-        for (MovableEntity bullet : bullets) {
-            for (MovableEntity opponent : opponents) {
-                if (opponent.isIntersect(bullet) && (bullet instanceof PlayerBullet)) {
-                    bullet.setMarkedToRemove();
-                    opponent.setMarkedToRemove();
-                    booms.add(new Boom(bullet.getX(), bullet.getY(), gameField));
-                }
-            }
+        bullets.forEach(bullet -> {
+            enemies.stream()
+                    .filter(enemy -> enemy.isIntersect(bullet) && (bullet instanceof PlayerBullet))
+                    .forEach(enemy -> {
+                        bullet.destroy();
+                        enemy.destroy();
+                        booms.add(new Boom(bullet.getX(), bullet.getY(), gameField));
+                    });
 
             if (player.isIntersect(bullet) && (bullet instanceof EnemyBullet)) {
-                bullet.setMarkedToRemove();
+                bullet.destroy();
                 booms.add(new Boom(bullet.getX(), bullet.getY(), gameField));
-                player.setLife(player.getLife() - 1);
+                player.decreaseLife();
             }
-        }
+        });
 
-        for (MovableEntity opponent : opponents) {
-            if (opponent.isIntersect(player)) {
-                player.setLife(player.getLife() - 1);
-                opponent.setMarkedToRemove();
-                booms.add(new Boom(opponent.getX(), opponent.getY(), gameField));
-            }
-        }
+        enemies.stream()
+                .filter(enemy -> enemy.isIntersect(player))
+                .forEach(enemy -> {
+                    player.decreaseLife();
+                    enemy.destroy();
+                    booms.add(new Boom(enemy.getX(), enemy.getY(), gameField));
+                });
     }
 
-    private static void removeObsolete(List<List<? extends MovableEntity>> allEntities) {
-        for (List<? extends MovableEntity> entities : allEntities) {
-            entities.removeIf(MovableEntity::isMarkedToRemove);
-        }
-    }
-
-    private static void move(List<List<? extends MovableEntity>> allEntities) {
-        for (List<? extends MovableEntity> entities : allEntities) {
-            for (MovableEntity entity : entities) {
-                entity.move();
-            }
-        }
+    private void removeDestroyed() {
+        bullets.removeIf(MovableEntity::isDestroyed);
+        enemies.removeIf(MovableEntity::isDestroyed);
+        booms.removeIf(MovableEntity::isDestroyed);
     }
 }

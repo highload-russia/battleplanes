@@ -4,18 +4,18 @@ public abstract class MovableEntity {
 
     private final int width;
     private final int height;
-    private final GameField gameField;
+    protected final GameField gameField;
 
     private int y;
     private int x;
-    private boolean markedToRemove;
+    private boolean destroyed;
 
     public MovableEntity(int x, int y, int width, int height, GameField gameField) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.markedToRemove = false;
+        this.destroyed = false;
         this.gameField = gameField;
     }
 
@@ -47,12 +47,12 @@ public abstract class MovableEntity {
         this.x = x;
     }
 
-    public boolean isMarkedToRemove() {
-        return markedToRemove;
+    public boolean isDestroyed() {
+        return destroyed;
     }
 
-    public void setMarkedToRemove() {
-        this.markedToRemove = true;
+    public void destroy() {
+        this.destroyed = true;
     }
 
     public boolean isIntersect(MovableEntity movableEntity) {

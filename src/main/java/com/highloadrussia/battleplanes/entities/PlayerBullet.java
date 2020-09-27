@@ -15,7 +15,7 @@ public class PlayerBullet extends MovableEntity {
         this.setX(this.getX() + 1);
 
         if (this.getX() == this.getGameField().getWidth()) {
-            this.setMarkedToRemove();
+            this.destroy();
         }
     }
 }

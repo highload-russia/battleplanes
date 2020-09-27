@@ -18,7 +18,7 @@ public class PlayerBulletTest {
         assertEquals(2, actualPlayerBullet.getX());
         assertEquals(1, actualPlayerBullet.getHeight());
         assertSame(gameField, actualPlayerBullet.getGameField());
-        assertFalse(actualPlayerBullet.isMarkedToRemove());
+        assertFalse(actualPlayerBullet.isDestroyed());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class PlayerBulletTest {
         PlayerBullet playerBullet = new PlayerBullet(player, new GameField(3, 1));
         playerBullet.move();
         assertEquals(3, playerBullet.getX());
-        assertTrue(playerBullet.isMarkedToRemove());
+        assertTrue(playerBullet.isDestroyed());
     }
 }
 

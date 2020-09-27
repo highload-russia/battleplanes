@@ -11,8 +11,8 @@ public class EnemyBullet extends MovableEntity {
 
     private int timeSlotsAwaitingToMove;
 
-    public EnemyBullet(Opponent opponent, GameField gameField) {
-        super(opponent.getX() - 1, opponent.getY() + ((opponent.getHeight() - 1) / 2), BULLET_WIDTH, BULLET_HEIGHT, gameField);
+    public EnemyBullet(Enemy enemy, GameField gameField) {
+        super(enemy.getX() - 1, enemy.getY() + ((enemy.getHeight() - 1) / 2), BULLET_WIDTH, BULLET_HEIGHT, gameField);
         this.timeSlotsAwaitingToMove = 0;
     }
 
@@ -26,7 +26,7 @@ public class EnemyBullet extends MovableEntity {
         }
 
         if (this.getX() == 0) {
-            this.setMarkedToRemove();
+            this.destroy();
         }
     }
 }

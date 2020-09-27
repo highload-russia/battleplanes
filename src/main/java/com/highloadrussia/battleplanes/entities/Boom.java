@@ -31,7 +31,7 @@ public class Boom extends MovableEntity {
         }
 
         if (this.getX() == 0 || this.getNumberOfAvailableMovements() == 0) {
-            this.setMarkedToRemove();
+            this.destroy();
         }
     }
 }

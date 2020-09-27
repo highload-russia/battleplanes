@@ -21,24 +21,35 @@ public class Player extends MovableEntity {
         this.distance = 0;
     }
 
-    public void moveUp() {
-        if (this.getY() > 0) {
-            this.setY(this.getY() - 1);
-        }
+    @Override
+    public void destroy() {
+        life = 0;
     }
 
-    public void moveDown() {
-        if (this.getY() + this.getHeight() < this.getGameField().getHeight()) {
-            this.setY(this.getY() + 1);
+    public PlayerBullet doAction(PlayerAction playerAction) {
+        switch (playerAction) {
+            case MOVE_UP:
+                moveUp();
+                break;
+            case MOVE_DOWN:
+                moveDown();
+                break;
+            case SHOOT:
+                return new PlayerBullet(this, gameField);
+            case EXIT:
+                destroy();
+                break;
         }
+
+        return null;
     }
 
     public int getLife() {
         return life;
     }
 
-    public void setLife(int life) {
-        this.life = life;
+    public void decreaseLife() {
+        life--;
     }
 
     public long getDistance() {
@@ -48,6 +59,18 @@ public class Player extends MovableEntity {
     public void move() {
         if (++distanceInTimeSlots % FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS == 0) {
             this.distance++;
+        }
+    }
+
+    private void moveUp() {
+        if (this.getY() > 0) {
+            this.setY(this.getY() - 1);
+        }
+    }
+
+    private void moveDown() {
+        if (this.getY() + this.getHeight() < this.getGameField().getHeight()) {
+            this.setY(this.getY() + 1);
         }
     }
 }

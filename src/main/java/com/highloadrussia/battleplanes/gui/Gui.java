@@ -14,7 +14,7 @@ public interface Gui {
 
     void drawPlayer(Player player);
 
-    void drawOpponents(List<Opponent> opponents);
+    void drawEnemies(List<Enemy> enemies);
 
     void drawBullets(List<MovableEntity> bullets);
 

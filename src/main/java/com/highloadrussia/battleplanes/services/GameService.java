@@ -33,5 +33,4 @@ public class GameService {
 
         gui.drawGameOver(game.getPlayer().getDistance());
     }
-
 }
