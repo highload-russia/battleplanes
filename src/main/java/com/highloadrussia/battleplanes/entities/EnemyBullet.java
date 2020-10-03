@@ -12,7 +12,7 @@ public class EnemyBullet extends MovableEntity {
     private int timeSlotsAwaitingToMove;
 
     public EnemyBullet(Enemy enemy, GameField gameField) {
-        super(enemy.getX() - 1, enemy.getY() + ((enemy.getHeight() - 1) / 2), BULLET_WIDTH, BULLET_HEIGHT, gameField);
+        super(enemy.x - 1, enemy.y + ((enemy.getHeight() - 1) / 2), BULLET_WIDTH, BULLET_HEIGHT, gameField);
         this.timeSlotsAwaitingToMove = 0;
     }
 
@@ -20,12 +20,12 @@ public class EnemyBullet extends MovableEntity {
 
         if (this.timeSlotsAwaitingToMove == FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS) {
             this.timeSlotsAwaitingToMove = 0;
-            this.setX(this.getX() - 1);
+            x--;
         } else {
             this.timeSlotsAwaitingToMove++;
         }
 
-        if (this.getX() == 0) {
+        if (x == 0) {
             this.destroy();
         }
     }

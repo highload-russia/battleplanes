@@ -63,14 +63,14 @@ public class Player extends MovableEntity {
     }
 
     private void moveUp() {
-        if (this.getY() > 0) {
-            this.setY(this.getY() - 1);
+        if (y > 0) {
+            y--;
         }
     }
 
     private void moveDown() {
-        if (this.getY() + this.getHeight() < this.getGameField().getHeight()) {
-            this.setY(this.getY() + 1);
+        if (y + this.getHeight() < this.getGameField().getHeight()) {
+            y++;
         }
     }
 }

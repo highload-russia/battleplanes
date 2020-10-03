@@ -22,15 +22,15 @@ public class Boom extends MovableEntity {
     }
 
     public void move() {
-        if (this.timeSlotsAwaiting == FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS) {
-            this.timeSlotsAwaiting = 0;
-            this.setX(this.getX() - 1);
+        if (timeSlotsAwaiting == FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS) {
+            timeSlotsAwaiting = 0;
+            x--;
             this.numberOfAvailableMovements--;
         } else {
             this.timeSlotsAwaiting++;
         }
 
-        if (this.getX() == 0 || this.getNumberOfAvailableMovements() == 0) {
+        if (x == 0 || this.getNumberOfAvailableMovements() == 0) {
             this.destroy();
         }
     }

@@ -46,13 +46,13 @@ public class Enemy extends MovableEntity {
 
         if (timeSlotsAwaitingToMove == FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS) {
             timeSlotsAwaitingToMove = 0;
-            setX(getX() - 1);
+            x--;
             if (timeSlotsAwaitingToChangeDirection == FREQUENCY_OF_CHANGE_DIRECTION_IN_TIMESLOTS) {
                 timeSlotsAwaitingToChangeDirection = 0;
-                if (player.getY() > getY()) {
-                    setY(getY() + 1);
-                } else if (player.getY() < getY()) {
-                    setY(getY() - 1);
+                if (player.y > y) {
+                    y++;
+                } else if (player.y < y) {
+                    y--;
                 }
             } else {
                 timeSlotsAwaitingToChangeDirection++;
@@ -61,7 +61,7 @@ public class Enemy extends MovableEntity {
             timeSlotsAwaitingToMove++;
         }
 
-        if (getX() == 0) {
+        if (x == 0) {
             destroy();
         }
     }

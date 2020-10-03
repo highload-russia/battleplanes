@@ -101,12 +101,12 @@ public class Game {
                     .forEach(enemy -> {
                         bullet.destroy();
                         enemy.destroy();
-                        booms.add(new Boom(bullet.getX(), bullet.getY(), gameField));
+                        booms.add(new Boom(bullet.x, bullet.y, gameField));
                     });
 
             if (player.isIntersect(bullet) && (bullet instanceof EnemyBullet)) {
                 bullet.destroy();
-                booms.add(new Boom(bullet.getX(), bullet.getY(), gameField));
+                booms.add(new Boom(bullet.x, bullet.y, gameField));
                 player.decreaseLife();
             }
         });
@@ -116,7 +116,7 @@ public class Game {
                 .forEach(enemy -> {
                     player.decreaseLife();
                     enemy.destroy();
-                    booms.add(new Boom(enemy.getX(), enemy.getY(), gameField));
+                    booms.add(new Boom(enemy.x, enemy.y, gameField));
                 });
     }
 

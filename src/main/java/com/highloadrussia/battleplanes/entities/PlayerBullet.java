@@ -8,14 +8,14 @@ public class PlayerBullet extends MovableEntity {
     private final static int BULLET_WIDTH = PropertiesProvider.getIntValue("bullet.width");
 
     public PlayerBullet(Player player, GameField gameField) {
-        super(player.getX() + 1, player.getY() + ((player.getHeight() - 1) / 2), BULLET_WIDTH, BULLET_HEIGHT, gameField);
+        super(player.x + 1, player.y + ((player.getHeight() - 1) / 2), BULLET_WIDTH, BULLET_HEIGHT, gameField);
     }
 
     public void move() {
-        this.setX(this.getX() + 1);
+        x++;
 
-        if (this.getX() == this.getGameField().getWidth()) {
-            this.destroy();
+        if (x == getGameField().getWidth()) {
+            destroy();
         }
     }
 }

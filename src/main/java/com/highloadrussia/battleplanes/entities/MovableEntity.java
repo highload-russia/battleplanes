@@ -6,8 +6,8 @@ public abstract class MovableEntity {
     private final int height;
     protected final GameField gameField;
 
-    private int y;
-    private int x;
+    protected int y;
+    protected int x;
     private boolean destroyed;
 
     public MovableEntity(int x, int y, int width, int height, GameField gameField) {
@@ -17,6 +17,14 @@ public abstract class MovableEntity {
         this.height = height;
         this.destroyed = false;
         this.gameField = gameField;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
     }
 
     public int getHeight() {
@@ -29,22 +37,6 @@ public abstract class MovableEntity {
 
     public GameField getGameField() {
         return gameField;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
     }
 
     public boolean isDestroyed() {
