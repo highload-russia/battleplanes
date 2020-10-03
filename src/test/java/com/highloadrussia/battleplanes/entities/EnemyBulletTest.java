@@ -18,7 +18,7 @@ public class EnemyBulletTest {
         assertEquals(4, actualEnemyBullet.getY());
         assertEquals(0, actualEnemyBullet.getX());
         assertEquals(1, actualEnemyBullet.getHeight());
-        assertSame(gameField1, actualEnemyBullet.getGameField());
+        assertSame(gameField1, actualEnemyBullet.gameField);
         assertFalse(actualEnemyBullet.isDestroyed());
     }
 

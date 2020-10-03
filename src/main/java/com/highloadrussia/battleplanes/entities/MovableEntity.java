@@ -1,22 +1,35 @@
 package com.highloadrussia.battleplanes.entities;
 
-public abstract class MovableEntity {
+public class MovableEntity {
 
-    private final int width;
-    private final int height;
+    private final int frequencyOfMovementInTimeslots;
+    private final MovingDirection direction;
+
+    private boolean destroyed;
+    private int timeSlotsAwaitingToMove;
+
     protected final GameField gameField;
-
     protected int y;
     protected int x;
-    private boolean destroyed;
+    protected final int width;
+    protected final int height;
 
-    public MovableEntity(int x, int y, int width, int height, GameField gameField) {
+    public MovableEntity(int x,
+                         int y,
+                         int width,
+                         int height,
+                         int frequencyOfMovementInTimeslots,
+                         MovingDirection direction,
+                         GameField gameField) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.frequencyOfMovementInTimeslots = frequencyOfMovementInTimeslots;
+        this.direction = direction;
         this.destroyed = false;
         this.gameField = gameField;
+        this.timeSlotsAwaitingToMove = 0;
     }
 
     public int getY() {
@@ -35,10 +48,6 @@ public abstract class MovableEntity {
         return width;
     }
 
-    public GameField getGameField() {
-        return gameField;
-    }
-
     public boolean isDestroyed() {
         return destroyed;
     }
@@ -48,10 +57,34 @@ public abstract class MovableEntity {
     }
 
     public boolean isIntersect(MovableEntity movableEntity) {
-        return ((this.y + this.height - 1) >= movableEntity.y &&
-                this.y <= (movableEntity.y + movableEntity.height) &&
-                this.x == movableEntity.x);
+        return ((y + height - 1) >= movableEntity.y &&
+                y <= (movableEntity.y + movableEntity.height) &&
+                x == movableEntity.x);
     }
 
-    public abstract void move();
+    public boolean move() {
+        if (timeSlotsAwaitingToMove == frequencyOfMovementInTimeslots) {
+            timeSlotsAwaitingToMove = 0;
+            switch (direction) {
+                case RIGHT:
+                    x++;
+                    if (x == gameField.getWidth()) {
+                        destroy();
+                    }
+                    break;
+                case LEFT:
+                    x--;
+                    if (x == 0) {
+                        this.destroy();
+                    }
+                    break;
+                case NONE: // nothing to do
+                    break;
+            }
+            return true;
+        } else {
+            timeSlotsAwaitingToMove++;
+            return false;
+        }
+    }
 }

@@ -2,6 +2,8 @@ package com.highloadrussia.battleplanes.entities;
 
 import com.highloadrussia.battleplanes.util.PropertiesProvider;
 
+import static com.highloadrussia.battleplanes.entities.MovingDirection.LEFT;
+
 public class Boom extends MovableEntity {
 
     private final static int FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS = PropertiesProvider.getIntValue("boom.frequency.of.movement.in.timeslots");
@@ -10,28 +12,20 @@ public class Boom extends MovableEntity {
     private final static int BOOM_WIDTH = PropertiesProvider.getIntValue("boom.width");
 
     private int numberOfAvailableMovements;
-    private int timeSlotsAwaiting;
 
     public Boom(int x, int y, GameField gameField) {
-        super(x, y, BOOM_WIDTH, BOOM_HEIGHT, gameField);
+        super(x, y, BOOM_WIDTH, BOOM_HEIGHT, FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS, LEFT, gameField);
         this.numberOfAvailableMovements = NUMBER_OF_MOVEMENTS;
     }
 
-    public int getNumberOfAvailableMovements() {
-        return numberOfAvailableMovements;
-    }
+    @Override
+    public boolean move() {
+        boolean moved = super.move();
 
-    public void move() {
-        if (timeSlotsAwaiting == FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS) {
-            timeSlotsAwaiting = 0;
-            x--;
-            this.numberOfAvailableMovements--;
-        } else {
-            this.timeSlotsAwaiting++;
+        if (moved && --numberOfAvailableMovements == 0) {
+            destroy();
         }
 
-        if (x == 0 || this.getNumberOfAvailableMovements() == 0) {
-            this.destroy();
-        }
+        return moved;
     }
 }

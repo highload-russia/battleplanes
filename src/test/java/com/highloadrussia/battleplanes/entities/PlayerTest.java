@@ -15,7 +15,7 @@ public class PlayerTest {
         assertEquals(-2, actualPlayer.getY());
         assertEquals(1, actualPlayer.getX());
         assertEquals(5, actualPlayer.getHeight());
-        assertSame(gameField, actualPlayer.getGameField());
+        assertSame(gameField, actualPlayer.gameField);
         assertFalse(actualPlayer.isDestroyed());
         assertEquals(5, actualPlayer.getLife());
         assertEquals(4, actualPlayer.getWidth());

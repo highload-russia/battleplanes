@@ -17,7 +17,7 @@ public class PlayerBulletTest {
         assertEquals(0, actualPlayerBullet.getY());
         assertEquals(2, actualPlayerBullet.getX());
         assertEquals(1, actualPlayerBullet.getHeight());
-        assertSame(gameField, actualPlayerBullet.getGameField());
+        assertSame(gameField, actualPlayerBullet.gameField);
         assertFalse(actualPlayerBullet.isDestroyed());
     }
 
