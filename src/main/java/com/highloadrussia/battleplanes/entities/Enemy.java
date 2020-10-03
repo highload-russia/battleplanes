@@ -20,7 +20,6 @@ public class Enemy extends MovableEntity {
     private int timeSlotsAwaitingToShoot;
 
     private final Player player;
-    private boolean readyToShoot;
 
     public Enemy(int y, GameField gameField, Player player) {
         super(gameField.getWidth(), y, ENEMY_WIDTH, ENEMY_HEIGHT, gameField);
@@ -30,27 +29,20 @@ public class Enemy extends MovableEntity {
         this.timeSlotsAwaitingToMove = 0;
         this.timeSlotsAwaitingToChangeDirection = random.nextInt(FREQUENCY_OF_CHANGE_DIRECTION_IN_TIMESLOTS);
         this.timeSlotsAwaitingToShoot = random.nextInt(FREQUENCY_OF_FIRE);
-        this.readyToShoot = false;
         this.player = player;
     }
 
     public EnemyBullet tryShoot() {
-        if (readyToShoot) {
-            readyToShoot = false;
+        if (timeSlotsAwaitingToShoot == FREQUENCY_OF_FIRE) {
+            timeSlotsAwaitingToShoot = 0;
             return new EnemyBullet(this, gameField);
         } else {
+            timeSlotsAwaitingToShoot++;
             return null;
         }
     }
 
     public void move() {
-
-        if (timeSlotsAwaitingToShoot == FREQUENCY_OF_FIRE) {
-            readyToShoot = true;
-            timeSlotsAwaitingToShoot = 0;
-        } else {
-            timeSlotsAwaitingToShoot++;
-        }
 
         if (timeSlotsAwaitingToMove == FREQUENCY_OF_MOVEMENT_IN_TIMESLOTS) {
             timeSlotsAwaitingToMove = 0;
