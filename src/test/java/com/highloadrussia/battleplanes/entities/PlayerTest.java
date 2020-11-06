@@ -22,29 +22,26 @@ public class PlayerTest {
     }
 
     @Test
-    // fixme
     public void testMoveUp() {
-/*        Player player = new Player(new GameField(1, 1));
-        player.setY(3);
+        Player player = new Player(new GameField(10, 10));
+        int playerY = player.getY();
         player.moveUp();
-        assertEquals(2, player.getY());*/
+        assertEquals(--playerY, player.getY());
     }
 
     @Test
-    // fixme
     public void testMoveDown() {
-/*        Player player = new Player(new GameField(1, 1));
-        player.setY(-2147483648);
+        Player player = new Player(new GameField(10, 10));
+        int playerY = player.getY();
         player.moveDown();
-        assertEquals(-2147483647, player.getY());*/
+        assertEquals(++playerY, player.getY());
     }
 
     @Test
-    // fixme
-    public void testSetLife() {
-/*        Player player = new Player(new GameField(1, 1));
-        player.setLife(1);
-        assertEquals(1, player.getLife());*/
+    public void testDecreaseLife() {
+        Player player = new Player(new GameField(1, 1));
+        player.decreaseLife();
+        assertEquals(4, player.getLife());
     }
 }
 

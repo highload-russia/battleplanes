@@ -3,7 +3,6 @@ package com.highloadrussia.battleplanes.entities;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,11 +23,14 @@ public class EnemyBulletTest {
 
     @Test
     public void testMove() {
-        GameField gameField = new GameField(1, 1);
+        GameField gameField = new GameField(10, 10);
         Enemy enemy = new Enemy(3, gameField, new Player(new GameField(1, 1)));
         EnemyBullet enemyBullet = new EnemyBullet(enemy, new GameField(1, 1));
-        enemyBullet.move();
-        assertTrue(enemyBullet.isDestroyed());
+        int enemyBulletX = enemyBullet.getX();
+        //noinspection StatementWithEmptyBody
+        do {
+        } while (!enemyBullet.move());
+        assertEquals(--enemyBulletX, enemyBullet.getX());
     }
 }
 
