@@ -4,14 +4,16 @@ import com.highloadrussia.battleplanes.entities.Game;
 import com.highloadrussia.battleplanes.entities.PlayerAction;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class GameServiceTest {
     @Test
-    public void testProcessInteractions() {
+    public void testGameMechanics() {
         Game g = new Game(1, 10);
+        int playerLife = g.getPlayer().getLife();
         g.move(PlayerAction.NONE);
-        assertEquals(4, g.getPlayer().getLife());
+        g.move(PlayerAction.NONE);
+        assertNotEquals(playerLife, g.getPlayer().getLife());
     }
 }
 
