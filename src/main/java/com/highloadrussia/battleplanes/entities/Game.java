@@ -15,14 +15,16 @@ public class Game {
     private final Player player;
 
     private final List<Enemy> enemies;
-    private final List<MovableEntity> bullets;
+    private final List<MovableEntity> playerBullets;
+    private final List<MovableEntity> enemyBullets;
     private final List<Boom> booms;
 
     public Game(int gameFieldWidthInColumns, int gameFieldHeightInColumns) {
         this.gameField = new GameField(gameFieldWidthInColumns, gameFieldHeightInColumns);
         this.player = new Player(gameField);
         this.enemies = new ArrayList<>();
-        this.bullets = new ArrayList<>();
+        this.playerBullets = new ArrayList<>();
+        this.enemyBullets = new ArrayList<>();
         this.booms = new ArrayList<>();
     }
 
@@ -38,8 +40,12 @@ public class Game {
         return enemies;
     }
 
-    public List<MovableEntity> getBullets() {
-        return bullets;
+    public List<MovableEntity> getEnemyBullets() {
+        return enemyBullets;
+    }
+
+    public List<MovableEntity> getPlayerBullets() {
+        return playerBullets;
     }
 
     public List<Boom> getBooms() {
@@ -67,7 +73,7 @@ public class Game {
                 PlayerBullet playerBullet = player.tryShoot();
 
                 if (playerBullet != null) {
-                    bullets.add(playerBullet);
+                    playerBullets.add(playerBullet);
                 }
                 break;
             case EXIT:
@@ -86,7 +92,8 @@ public class Game {
 
     private void moveUnits() {
         player.move();
-        bullets.forEach(MovableEntity::move);
+        playerBullets.forEach(MovableEntity::move);
+        enemyBullets.forEach(MovableEntity::move);
         enemies.forEach(MovableEntity::move);
         booms.forEach(MovableEntity::move);
     }
@@ -103,25 +110,31 @@ public class Game {
         enemies.stream()
                 .map(Enemy::tryShoot)
                 .filter(Objects::nonNull)
-                .forEach(bullets::add);
+                .forEach(enemyBullets::add);
     }
 
     private void processInteractions() {
-        bullets.forEach(bullet -> {
-            enemies.stream()
-                    .filter(enemy -> enemy.isIntersect(bullet) && (bullet instanceof PlayerBullet))
-                    .forEach(enemy -> {
-                        bullet.destroy();
-                        enemy.destroy();
-                        booms.add(new Boom(bullet.x, bullet.y, gameField));
-                    });
+        playerBullets.forEach(
+                bullet -> enemies.stream()
+                        .filter(enemy -> enemy.isIntersect(bullet))
+                        .forEach(enemy -> {
+                                    bullet.destroy();
+                                    enemy.destroy();
+                                    booms.add(new Boom(bullet.x, bullet.y, gameField));
+                                }
+                        )
+        );
 
-            if (player.isIntersect(bullet) && (bullet instanceof EnemyBullet)) {
-                bullet.destroy();
-                booms.add(new Boom(bullet.x, bullet.y, gameField));
-                player.decreaseLife();
-            }
-        });
+        enemyBullets.forEach(
+                bullet ->
+                {
+                    if (player.isIntersect(bullet)) {
+                        bullet.destroy();
+                        booms.add(new Boom(bullet.x, bullet.y, gameField));
+                        player.decreaseLife();
+                    }
+                }
+        );
 
         enemies.stream()
                 .filter(enemy -> enemy.isIntersect(player))
@@ -138,7 +151,8 @@ public class Game {
         Predicate<Boom> boomDestroyingPredicate =
                 e -> e.isDestroyed() || e.x <= 0 || e.x > gameField.getWidth() || e.getNumberOfAvailableMovements() <= 0;
 
-        bullets.removeIf(movableEntityDestroyingPredicate);
+        playerBullets.removeIf(movableEntityDestroyingPredicate);
+        enemyBullets.removeIf(movableEntityDestroyingPredicate);
         enemies.removeIf(movableEntityDestroyingPredicate);
         booms.removeIf(boomDestroyingPredicate);
     }

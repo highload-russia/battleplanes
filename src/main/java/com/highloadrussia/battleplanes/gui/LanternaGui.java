@@ -159,7 +159,8 @@ public class LanternaGui implements Gui {
     public void redraw(Game game) throws IOException {
         screen.clear();
         drawPlayer(game.getPlayer());
-        drawBullets(game.getBullets());
+        drawBullets(game.getPlayerBullets());
+        drawBullets(game.getEnemyBullets());
         drawEnemies(game.getEnemies());
         drawBooms(game.getBooms());
         drawLife(game.getPlayer());
