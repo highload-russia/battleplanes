@@ -56,33 +56,19 @@ public class Player extends MovableEntity {
         return distance;
     }
 
-    public PlayerBullet doAction(PlayerAction playerAction) {
-        switch (playerAction) {
-            case MOVE_UP:
-                moveUp();
-                break;
-            case MOVE_DOWN:
-                moveDown();
-                break;
-            case SHOOT:
-                return new PlayerBullet(this, gameField);
-            case EXIT:
-                destroy();
-                break;
-        }
-
-        return null;
-    }
-
-    private void moveUp() {
+    public void moveUp() {
         if (y > 0) {
             y--;
         }
     }
 
-    private void moveDown() {
+    public void moveDown() {
         if (y + height < gameField.getHeight()) {
             y++;
         }
+    }
+
+    public PlayerBullet tryShoot() {
+        return new PlayerBullet(this, gameField);
     }
 }

@@ -18,12 +18,16 @@ public class Boom extends MovableEntity {
         this.numberOfAvailableMovements = NUMBER_OF_MOVEMENTS;
     }
 
+    public int getNumberOfAvailableMovements() {
+        return numberOfAvailableMovements;
+    }
+
     @Override
     public boolean move() {
         boolean moved = super.move();
 
-        if (moved && --numberOfAvailableMovements == 0) {
-            destroy();
+        if (numberOfAvailableMovements > 0 && moved) {
+            numberOfAvailableMovements--;
         }
 
         return moved;

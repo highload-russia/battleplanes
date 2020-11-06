@@ -1,6 +1,6 @@
 package com.highloadrussia.battleplanes.entities;
 
-public class MovableEntity {
+public abstract class MovableEntity {
 
     private final int frequencyOfMovementInTimeslots;
     private final MovingDirection direction;
@@ -68,15 +68,9 @@ public class MovableEntity {
             switch (direction) {
                 case RIGHT:
                     x++;
-                    if (x == gameField.getWidth()) {
-                        destroy();
-                    }
                     break;
                 case LEFT:
                     x--;
-                    if (x == 0) {
-                        this.destroy();
-                    }
                     break;
                 case NONE: // nothing to do
                     break;

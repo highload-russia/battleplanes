@@ -5,6 +5,7 @@ import com.highloadrussia.battleplanes.entities.factories.EnemyFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class Game {
 
@@ -54,7 +55,26 @@ public class Game {
     }
 
     public void move(PlayerAction playerAction) {
-        doPlayerAction(playerAction);
+
+        switch (playerAction) {
+            case MOVE_UP:
+                player.moveUp();
+                break;
+            case MOVE_DOWN:
+                player.moveDown();
+                break;
+            case SHOOT:
+                PlayerBullet playerBullet = player.tryShoot();
+
+                if (playerBullet != null) {
+                    bullets.add(playerBullet);
+                }
+                break;
+            case EXIT:
+                player.destroy();
+                return;
+        }
+
         createEnemies();
         doEnemiesAction();
         processInteractions();
@@ -86,14 +106,6 @@ public class Game {
                 .forEach(bullets::add);
     }
 
-    private void doPlayerAction(PlayerAction playerAction) {
-        PlayerBullet bullet = player.doAction(playerAction);
-
-        if (bullet != null) {
-            bullets.add(bullet);
-        }
-    }
-
     private void processInteractions() {
         bullets.forEach(bullet -> {
             enemies.stream()
@@ -121,8 +133,13 @@ public class Game {
     }
 
     private void removeDestroyed() {
-        bullets.removeIf(MovableEntity::isDestroyed);
-        enemies.removeIf(MovableEntity::isDestroyed);
-        booms.removeIf(MovableEntity::isDestroyed);
+        Predicate<MovableEntity> movableEntityDestroyingPredicate =
+                e -> e.isDestroyed() || e.x <= 0 || e.x > gameField.getWidth();
+        Predicate<Boom> boomDestroyingPredicate =
+                e -> e.isDestroyed() || e.x <= 0 || e.x > gameField.getWidth() || e.getNumberOfAvailableMovements() <= 0;
+
+        bullets.removeIf(movableEntityDestroyingPredicate);
+        enemies.removeIf(movableEntityDestroyingPredicate);
+        booms.removeIf(boomDestroyingPredicate);
     }
 }
