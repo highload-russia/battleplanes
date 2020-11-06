@@ -15,33 +15,33 @@ public class PlayerTest {
         assertEquals(-2, actualPlayer.getY());
         assertEquals(1, actualPlayer.getX());
         assertEquals(5, actualPlayer.getHeight());
-        assertSame(gameField, actualPlayer.getGameField());
-        assertFalse(actualPlayer.isMarkedToRemove());
+        assertSame(gameField, actualPlayer.gameField);
+        assertFalse(actualPlayer.isDestroyed());
         assertEquals(5, actualPlayer.getLife());
         assertEquals(4, actualPlayer.getWidth());
     }
 
     @Test
     public void testMoveUp() {
-        Player player = new Player(new GameField(1, 1));
-        player.setY(3);
+        Player player = new Player(new GameField(10, 10));
+        int playerY = player.getY();
         player.moveUp();
-        assertEquals(2, player.getY());
+        assertEquals(--playerY, player.getY());
     }
 
     @Test
     public void testMoveDown() {
-        Player player = new Player(new GameField(1, 1));
-        player.setY(-2147483648);
+        Player player = new Player(new GameField(10, 10));
+        int playerY = player.getY();
         player.moveDown();
-        assertEquals(-2147483647, player.getY());
+        assertEquals(++playerY, player.getY());
     }
 
     @Test
-    public void testSetLife() {
+    public void testDecreaseLife() {
         Player player = new Player(new GameField(1, 1));
-        player.setLife(1);
-        assertEquals(1, player.getLife());
+        player.decreaseLife();
+        assertEquals(4, player.getLife());
     }
 }
 

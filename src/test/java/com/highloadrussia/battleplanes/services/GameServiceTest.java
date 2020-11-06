@@ -1,26 +1,19 @@
 package com.highloadrussia.battleplanes.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import com.highloadrussia.battleplanes.entities.GameField;
-import com.highloadrussia.battleplanes.entities.MovableEntity;
-import com.highloadrussia.battleplanes.entities.Player;
-
-import java.util.ArrayList;
-
+import com.highloadrussia.battleplanes.entities.Game;
+import com.highloadrussia.battleplanes.entities.PlayerAction;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class GameServiceTest {
     @Test
-    public void testProcessInteractions() {
-        Player e = new Player(new GameField(1, 1));
-        ArrayList<MovableEntity> movableEntityList = new ArrayList<>();
-        movableEntityList.add(e);
-        Player player = new Player(new GameField(1, 1));
-        GameField gameField = new GameField(1, 1);
-        ArrayList<MovableEntity> bullets = new ArrayList<>();
-        GameService.processInteractions(movableEntityList, bullets, new ArrayList<>(), player, gameField);
-        assertEquals(4, player.getLife());
+    public void testGameMechanics() {
+        Game g = new Game(1, 10);
+        int playerLife = g.getPlayer().getLife();
+        g.move(PlayerAction.NONE);
+        g.move(PlayerAction.NONE);
+        assertNotEquals(playerLife, g.getPlayer().getLife());
     }
 }
 

@@ -3,7 +3,6 @@ package com.highloadrussia.battleplanes.entities;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +16,8 @@ public class PlayerBulletTest {
         assertEquals(0, actualPlayerBullet.getY());
         assertEquals(2, actualPlayerBullet.getX());
         assertEquals(1, actualPlayerBullet.getHeight());
-        assertSame(gameField, actualPlayerBullet.getGameField());
-        assertFalse(actualPlayerBullet.isMarkedToRemove());
+        assertSame(gameField, actualPlayerBullet.gameField);
+        assertFalse(actualPlayerBullet.isDestroyed());
     }
 
     @Test
@@ -29,13 +28,5 @@ public class PlayerBulletTest {
         assertEquals(3, playerBullet.getX());
     }
 
-    @Test
-    public void testMove2() {
-        Player player = new Player(new GameField(1, 1));
-        PlayerBullet playerBullet = new PlayerBullet(player, new GameField(3, 1));
-        playerBullet.move();
-        assertEquals(3, playerBullet.getX());
-        assertTrue(playerBullet.isMarkedToRemove());
-    }
 }
 
