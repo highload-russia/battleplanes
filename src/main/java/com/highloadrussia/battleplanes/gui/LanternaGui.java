@@ -62,50 +62,6 @@ public class LanternaGui implements Gui {
     }
 
     @Override
-    public void drawPlayer(Player player) {
-        int playerRow = player.getY();
-        tg.drawTriangle(
-                new TerminalPosition(player.getX(), playerRow),
-                new TerminalPosition(player.getX(), playerRow + player.getHeight() - 1),
-                new TerminalPosition(player.getWidth(), playerRow + (player.getHeight() / 2)),
-                PLAYER_DRAWING_CHARACTER);
-    }
-
-    @Override
-    public void drawEnemies(List<Enemy> enemies) {
-        for (Enemy enemy : enemies) {
-            tg.drawRectangle(
-                    new TerminalPosition(enemy.getX(), enemy.getY()),
-                    new TerminalSize(enemy.getWidth(), enemy.getHeight()),
-                    ENEMY_DRAWING_CHARACTER);
-        }
-    }
-
-    @Override
-    public void drawBullets(List<MovableEntity> bullets) {
-        for (MovableEntity bullet : bullets) {
-            tg.putString(new TerminalPosition(bullet.getX(), bullet.getY()), BULLET_DRAWING_STRING);
-        }
-    }
-
-    @Override
-    public void drawBooms(List<Boom> booms) {
-        for (MovableEntity boom : booms) {
-            tg.putString(new TerminalPosition(boom.getX(), boom.getY()), BOOM_EVENT_LABEL);
-        }
-    }
-
-    @Override
-    public void drawLife(Player player) throws IOException {
-        tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2 - 10, 1), "Life: " + player.getLife());
-    }
-
-    @Override
-    public void drawDistance(Player player) throws IOException {
-        tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, 1), "Distance: " + player.getDistance());
-    }
-
-    @Override
     public void drawMenu() throws IOException {
         int firstLabelRow = terminal.getTerminalSize().getRows() / 2 - 3;
         screen.clear();
@@ -171,5 +127,44 @@ public class LanternaGui implements Gui {
     @Override
     public void exit() throws IOException {
         screen.close();
+    }
+
+
+    private void drawPlayer(Player player) {
+        int playerRow = player.getY();
+        tg.drawTriangle(
+                new TerminalPosition(player.getX(), playerRow),
+                new TerminalPosition(player.getX(), playerRow + player.getHeight() - 1),
+                new TerminalPosition(player.getWidth(), playerRow + (player.getHeight() / 2)),
+                PLAYER_DRAWING_CHARACTER);
+    }
+
+    private void drawEnemies(List<Enemy> enemies) {
+        for (Enemy enemy : enemies) {
+            tg.drawRectangle(
+                    new TerminalPosition(enemy.getX(), enemy.getY()),
+                    new TerminalSize(enemy.getWidth(), enemy.getHeight()),
+                    ENEMY_DRAWING_CHARACTER);
+        }
+    }
+
+    private void drawBullets(List<MovableEntity> bullets) {
+        for (MovableEntity bullet : bullets) {
+            tg.putString(new TerminalPosition(bullet.getX(), bullet.getY()), BULLET_DRAWING_STRING);
+        }
+    }
+
+    private void drawBooms(List<Boom> booms) {
+        for (MovableEntity boom : booms) {
+            tg.putString(new TerminalPosition(boom.getX(), boom.getY()), BOOM_EVENT_LABEL);
+        }
+    }
+
+    private void drawLife(Player player) throws IOException {
+        tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2 - 10, 1), "Life: " + player.getLife());
+    }
+
+    private void drawDistance(Player player) throws IOException {
+        tg.putString(new TerminalPosition(terminal.getTerminalSize().getColumns() / 2, 1), "Distance: " + player.getDistance());
     }
 }

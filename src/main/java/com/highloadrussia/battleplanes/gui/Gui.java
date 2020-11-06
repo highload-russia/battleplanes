@@ -3,7 +3,6 @@ package com.highloadrussia.battleplanes.gui;
 import com.highloadrussia.battleplanes.entities.*;
 
 import java.io.IOException;
-import java.util.List;
 
 public interface Gui {
     int getHeightInRows();
@@ -11,18 +10,6 @@ public interface Gui {
     int getWidthInColumns();
 
     void init() throws IOException;
-
-    void drawPlayer(Player player);
-
-    void drawEnemies(List<Enemy> enemies);
-
-    void drawBullets(List<MovableEntity> bullets);
-
-    void drawBooms(List<Boom> booms);
-
-    void drawLife(Player player) throws IOException;
-
-    void drawDistance(Player player) throws IOException;
 
     void drawMenu() throws IOException;
 
